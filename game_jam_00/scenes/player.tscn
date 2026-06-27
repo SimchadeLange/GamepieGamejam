@@ -1,18 +1,34 @@
 [gd_scene format=3 uid="uid://cll5o11denx7"]
 
-[ext_resource type="Texture2D" uid="uid://cx6bmmhbdhhjl" path="res://icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bxnod8igdpq6p" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://blaf4h42ftb12" path="res://assets/player_temp.png" id="2_g2els"]
+[ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/statemachine/state_machine.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://debfixgfwcphs" path="res://scripts/idle_state.gd" id="4_dqkch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
-size = Vector2(26, 26)
+size = Vector2(10, 12)
 
-[node name="Player" type="CharacterBody2D" unique_id=291136771]
+[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("p_sprite", "state_machine")]
 z_index = 1
 script = ExtResource("1_g2els")
+p_sprite = NodePath("Sprite2D")
+state_machine = NodePath("StateMachine")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=846788843]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_3vyb7")
+texture = ExtResource("2_g2els")
+offset = Vector2(0, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=220740742]
+visible = false
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_uxpb3")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1703812370 node_paths=PackedStringArray("character", "current_state")]
+script = ExtResource("3_qhqgy")
+character = NodePath("..")
+current_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1601426793]
+script = ExtResource("4_dqkch")
+
+[node name="Node" type="Node" parent="StateMachine" unique_id=702436683]

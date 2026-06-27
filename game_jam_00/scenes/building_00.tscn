@@ -1,3 +1,23 @@
 [gd_scene format=3 uid="uid://bnvbo5wjckmcc"]
 
-[node name="Building_00" type="Node2D" unique_id=1970538616]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
+size = Vector2(58, 58)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5yfdf"]
+polygon = PackedVector2Array(-29, -29, 29, -29, 29, -29, 29, 29, -29, 29)
+
+[node name="Building_00" type="StaticBody2D" unique_id=782825066]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1005857304]
+offset_left = -29.0
+offset_top = -29.0
+offset_right = 29.0
+offset_bottom = 29.0
+color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1807745258]
+visible = false
+shape = SubResource("RectangleShape2D_uxpb3")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1938981174]
+occluder = SubResource("OccluderPolygon2D_5yfdf")

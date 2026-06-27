@@ -1,12 +1,19 @@
 [gd_scene format=3 uid="uid://dg20bly5q7crl"]
 
 [ext_resource type="PackedScene" uid="uid://cll5o11denx7" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://bnvbo5wjckmcc" path="res://scenes/building_00.tscn" id="2_0wfyh"]
+
+[sub_resource type="Gradient" id="Gradient_0wfyh"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jyhfs"]
+gradient = SubResource("Gradient_0wfyh")
 
 [node name="Main" type="Node2D" unique_id=1317248791]
 
 [node name="Player" parent="." unique_id=291136771 instance=ExtResource("1_o5qli")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=854447935]
+zoom = Vector2(2, 2)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=747022573]
 offset_left = -151.0
@@ -14,3 +21,23 @@ offset_top = -152.0
 offset_right = 153.0
 offset_bottom = 152.0
 color = Color(0.60392326, 0.60392326, 0.6039232, 1)
+
+[node name="Building_00" parent="." unique_id=1970538616 instance=ExtResource("2_0wfyh")]
+position = Vector2(57, -29)
+rotation = 0.23212878
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=702971460]
+position = Vector2(93, -47)
+scale = Vector2(0.3515625, 70.5)
+shadow_enabled = true
+texture = SubResource("GradientTexture1D_jyhfs")
+
+[node name="Dark" type="CanvasLayer" parent="." unique_id=424566817]
+
+[node name="ColorRect2" type="ColorRect" parent="Dark" unique_id=1209193094]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.078431375, 0.08627451, 0.13725491, 0.23921569)
