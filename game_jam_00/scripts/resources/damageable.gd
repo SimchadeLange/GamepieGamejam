@@ -6,5 +6,5 @@ class_name Damageable
 @export var health: int
 
 
-func take_damage(amount: int) -> void:
+func take_damage(_amount: int) -> void:
 	pass
