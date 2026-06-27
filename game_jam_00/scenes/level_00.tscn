@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cr7wvbadmtug7"]
+
+[ext_resource type="PackedScene" uid="uid://cll5o11denx7" path="res://scenes/player.tscn" id="1_bvxu8"]
+
+[node name="level00" type="Node2D" unique_id=738375304]
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1467181285]
+offset_left = 75.0
+offset_top = -100.0
+offset_right = 300.0
+offset_bottom = -17.0
+
+[node name="dsda" type="ColorRect" parent="." unique_id=2010522234]
+offset_left = 59.0
+offset_top = -28.0
+offset_right = 64.0
+offset_bottom = -17.0
+
+[node name="ColorRect4" type="ColorRect" parent="." unique_id=595944476]
+offset_left = 403.0
+offset_top = -128.0
+offset_right = 533.0
+offset_bottom = -40.0
+
+[node name="Player" parent="." unique_id=291136771 instance=ExtResource("1_bvxu8")]
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=747771882]
+
+[node name="Label" type="Label" parent="." unique_id=1778200192]
+offset_left = -158.0
+offset_top = -83.0
+offset_right = 143.0
+offset_bottom = -60.0
+text = "inter act with the torch to dim the light"
