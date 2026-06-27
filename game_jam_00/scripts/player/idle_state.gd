@@ -17,7 +17,7 @@ func state_process(_delta):
 
 
 func state_input(event : InputEvent):
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("ui_accept") and character.can_roll:
 		next_state = rolling_state
 
 

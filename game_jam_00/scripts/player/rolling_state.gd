@@ -16,15 +16,11 @@ func on_enter() -> void:
 	roll_duration_timer.start()
 
 
-#func state_process(delta) -> void:
-	#character.velocity = lerp(character.velocity, Vector2.ZERO, delta)
-	#character.velocity.normalized()
-
-
 func on_exit() -> void:
 	roll_duration_timer.stop()
 	character.velocity -= character.velocity / 2
 	roll_cooldown_timer.start()
+	character.can_roll = false
 
 
 func _on_roll_duration_timeout() -> void:

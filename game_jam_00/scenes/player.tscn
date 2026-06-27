@@ -33,22 +33,23 @@ current_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1601426793 node_paths=PackedStringArray("rolling_state", "roll_cooldown_timer")]
 script = ExtResource("4_dqkch")
 rolling_state = NodePath("../Rolling")
-roll_cooldown_timer = NodePath("RollCooldown")
-
-[node name="RollCooldown" type="Timer" parent="StateMachine/Idle" unique_id=514302148]
-one_shot = true
+roll_cooldown_timer = NodePath("../Rolling/RollCooldown")
 
 [node name="Rolling" type="Node" parent="StateMachine" unique_id=702436683 node_paths=PackedStringArray("idle_state", "roll_duration_timer", "roll_cooldown_timer")]
 script = ExtResource("5_qlg0r")
 idle_state = NodePath("../Idle")
 roll_duration_timer = NodePath("RollDuration")
-roll_cooldown_timer = NodePath("../Idle/RollCooldown")
+roll_cooldown_timer = NodePath("RollCooldown")
 
 [node name="RollDuration" type="Timer" parent="StateMachine/Rolling" unique_id=164356852]
 wait_time = 0.2
 one_shot = true
 
+[node name="RollCooldown" type="Timer" parent="StateMachine/Rolling" unique_id=514302148]
+one_shot = true
+
 [node name="DebugState" type="Label" parent="." unique_id=824812807 node_paths=PackedStringArray("state_machine")]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("6_tuyoq")
