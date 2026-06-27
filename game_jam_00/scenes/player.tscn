@@ -2,10 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bxnod8igdpq6p" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://blaf4h42ftb12" path="res://assets/player_temp.png" id="2_g2els"]
-[ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/statemachine/state_machine.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://dkbomf5xkxumd" path="res://scripts/resources/damageable.gd" id="3_fjrip"]
+[ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://debfixgfwcphs" path="res://scripts/player/idle_state.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://bugqq7br7b5rm" path="res://scripts/player/rolling_state.gd" id="5_qlg0r"]
-[ext_resource type="Script" uid="uid://8rm7xyjparas" path="res://scripts/statemachine/state_debug_label.gd" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://8rm7xyjparas" path="res://scripts/resources/statemachine/state_debug_label.gd" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://cneafiljv3m33" path="res://scripts/player/dead_state.gd" id="7_smehm"]
+[ext_resource type="Script" uid="uid://4blfegepmauf" path="res://scripts/player/hit_state.gd" id="8_ur7pv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(10, 12)
@@ -24,6 +27,11 @@ offset = Vector2(0, -2)
 visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_uxpb3")
+
+[node name="Damageable" type="Node" parent="." unique_id=1700459083 node_paths=PackedStringArray("character", "hit_state")]
+script = ExtResource("3_fjrip")
+character = NodePath("..")
+hit_state = NodePath("../StateMachine/Hit")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1703812370 node_paths=PackedStringArray("character", "current_state")]
 script = ExtResource("3_qhqgy")
@@ -47,6 +55,14 @@ one_shot = true
 
 [node name="RollCooldown" type="Timer" parent="StateMachine/Rolling" unique_id=514302148]
 one_shot = true
+
+[node name="Dead" type="Node" parent="StateMachine" unique_id=544298561]
+script = ExtResource("7_smehm")
+can_move = false
+
+[node name="Hit" type="Node" parent="StateMachine" unique_id=507577917]
+script = ExtResource("8_ur7pv")
+can_move = false
 
 [node name="DebugState" type="Label" parent="." unique_id=824812807 node_paths=PackedStringArray("state_machine")]
 visible = false
