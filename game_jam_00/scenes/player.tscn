@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://cll5o11denx7"]
 
-[ext_resource type="Script" uid="uid://bxnod8igdpq6p" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://bxnod8igdpq6p" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://blaf4h42ftb12" path="res://assets/player_temp.png" id="2_g2els"]
 [ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/statemachine/state_machine.gd" id="3_qhqgy"]
-[ext_resource type="Script" uid="uid://debfixgfwcphs" path="res://scripts/idle_state.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://debfixgfwcphs" path="res://scripts/player/idle_state.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://bugqq7br7b5rm" path="res://scripts/player/rolling_state.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://8rm7xyjparas" path="res://scripts/statemachine/state_debug_label.gd" id="6_tuyoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(10, 12)
@@ -28,7 +30,26 @@ script = ExtResource("3_qhqgy")
 character = NodePath("..")
 current_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1601426793]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1601426793 node_paths=PackedStringArray("rolling_state", "roll_cooldown_timer")]
 script = ExtResource("4_dqkch")
+rolling_state = NodePath("../Rolling")
+roll_cooldown_timer = NodePath("RollCooldown")
 
-[node name="Node" type="Node" parent="StateMachine" unique_id=702436683]
+[node name="RollCooldown" type="Timer" parent="StateMachine/Idle" unique_id=514302148]
+one_shot = true
+
+[node name="Rolling" type="Node" parent="StateMachine" unique_id=702436683 node_paths=PackedStringArray("idle_state", "roll_duration_timer", "roll_cooldown_timer")]
+script = ExtResource("5_qlg0r")
+idle_state = NodePath("../Idle")
+roll_duration_timer = NodePath("RollDuration")
+roll_cooldown_timer = NodePath("../Idle/RollCooldown")
+
+[node name="RollDuration" type="Timer" parent="StateMachine/Rolling" unique_id=164356852]
+wait_time = 0.2
+one_shot = true
+
+[node name="DebugState" type="Label" parent="." unique_id=824812807 node_paths=PackedStringArray("state_machine")]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("6_tuyoq")
+state_machine = NodePath("../StateMachine")
