@@ -7,11 +7,13 @@ class_name Player
 
 const SPEED: float = 42.0
 
-#var can_move: bool = state_machine.current_state.can_move
 var dir: Vector2
 var prev_dir: Vector2
+var can_move: bool = false
 
 func _physics_process(delta: float) -> void:
+	can_move = state_machine.current_state.can_move
+	
 	#Direction input and movement handling
 	dir.x = Input.get_axis("move_left", "move_right")
 	dir.y = Input.get_axis("move_up", "move_down")
