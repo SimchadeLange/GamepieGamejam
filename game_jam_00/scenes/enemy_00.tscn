@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cnm00wt2ojqqd"]
+
+[ext_resource type="Texture2D" uid="uid://cx6bmmhbdhhjl" path="res://icon.svg" id="1_jc35d"]
+[ext_resource type="Script" uid="uid://dkbomf5xkxumd" path="res://scripts/resources/health_component.gd" id="2_3dgu2"]
+[ext_resource type="Script" uid="uid://bainvlpqjw1h3" path="res://scripts/resources/hitbox_component.gd" id="3_0pc7c"]
+[ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="4_yjhhj"]
+[ext_resource type="Script" uid="uid://ctb3oc8wewgcl" path="res://scripts/enemy/enemy_00/idle_state.gd" id="5_qpise"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yfdf"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
+size = Vector2(12, 12)
+
+[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1511814066]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_jc35d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=585940616]
+visible = false
+shape = SubResource("RectangleShape2D_5yfdf")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1567124381]
+script = ExtResource("2_3dgu2")
+metadata/_custom_type_script = "uid://dkbomf5xkxumd"
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=1259340042 node_paths=PackedStringArray("health_component")]
+script = ExtResource("3_0pc7c")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://bainvlpqjw1h3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1147435840]
+shape = SubResource("RectangleShape2D_uxpb3")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1304734705]
+script = ExtResource("4_yjhhj")
+metadata/_custom_type_script = "uid://ctk743jn0ttiy"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1610090786]
+script = ExtResource("5_qpise")

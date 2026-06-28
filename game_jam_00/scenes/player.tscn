@@ -105,7 +105,7 @@ occluder = SubResource("OccluderPolygon2D_5yfdf")
 texture = ExtResource("2_y4r1p")
 offset = Vector2(0, -2)
 hframes = 6
-frame = 5
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=220740742]
 visible = false
