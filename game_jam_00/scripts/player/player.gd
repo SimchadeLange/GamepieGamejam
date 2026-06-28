@@ -4,6 +4,7 @@ class_name Player
 
 @export var sprite: Sprite2D
 @export var state_machine: CharacterStateMachine
+@export var anim_tree: AnimationTree
 @export var health_component: HealthComponent
 @export var weapon: Weapon
 
@@ -13,6 +14,9 @@ var dir: Vector2
 var prev_dir: Vector2
 var can_move: bool = false
 var can_roll: bool = true
+
+func _ready() -> void:
+	anim_tree.active = true
 
 func _physics_process(delta: float) -> void:
 	# Getting current state can_move bool

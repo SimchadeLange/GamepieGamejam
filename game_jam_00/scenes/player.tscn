@@ -93,13 +93,14 @@ _data = {
 &"walking": SubResource("Animation_jej6c")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("sprite", "state_machine", "health_component", "weapon")]
+[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("sprite", "state_machine", "anim_tree", "health_component", "weapon")]
 z_index = 1
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_g2els")
 sprite = NodePath("Sprite2D")
 state_machine = NodePath("StateMachine")
+anim_tree = NodePath("AnimationTree")
 health_component = NodePath("HealthComponent")
 weapon = NodePath("TestWeapon")
 
@@ -111,7 +112,6 @@ occluder = SubResource("OccluderPolygon2D_bq816")
 texture = ExtResource("2_y4r1p")
 offset = Vector2(0, -2)
 hframes = 6
-frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=220740742]
 visible = false
@@ -184,6 +184,7 @@ can_move = false
 one_shot = true
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1530141892]
+active = false
 root_node = NodePath(".")
 tree_root = SubResource("AnimationNodeStateMachine_f1ej7")
 advance_expression_base_node = NodePath("..")
