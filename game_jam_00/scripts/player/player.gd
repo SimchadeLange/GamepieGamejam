@@ -12,8 +12,8 @@ var prev_dir: Vector2
 var can_move: bool = false
 var can_roll: bool = true
 
-
 func _physics_process(delta: float) -> void:
+	# Getting current state can_move bool
 	can_move = state_machine.current_state.can_move
 	
 	# Direction input and movement handling
