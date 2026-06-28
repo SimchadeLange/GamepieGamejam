@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxnod8igdpq6p" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dkhiagurhw5fw" path="res://assets/player.png" id="2_y4r1p"]
+[ext_resource type="Script" uid="uid://chfe63j6kexn2" path="res://scripts/resources/weapon.gd" id="3_d2wvv"]
 [ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://dkbomf5xkxumd" path="res://scripts/resources/health_component.gd" id="3_ur7pv"]
 [ext_resource type="Script" uid="uid://debfixgfwcphs" path="res://scripts/player/idle_state.gd" id="4_dqkch"]
@@ -10,12 +11,16 @@
 [ext_resource type="Script" uid="uid://8rm7xyjparas" path="res://scripts/resources/statemachine/state_debug_label.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://cneafiljv3m33" path="res://scripts/player/dead_state.gd" id="7_smehm"]
 [ext_resource type="Script" uid="uid://4blfegepmauf" path="res://scripts/player/hit_state.gd" id="8_ur7pv"]
+[ext_resource type="Script" uid="uid://207f4hdovnwp" path="res://scripts/player/attacking_state.gd" id="11_3v2ag"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5yfdf"]
-polygon = PackedVector2Array(2, -13, 3, -18, 5, -21, 11, -21, 13, -17, 14, -12, 11, -10, 5, -10)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bq816"]
+polygon = PackedVector2Array(-3, 2, 3, 2, 6, -2, 3, -10, -4, -10, -6, -6, -6, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(10, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rii1s"]
+size = Vector2(10, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5yfdf"]
 size = Vector2(10, 15)
@@ -88,29 +93,40 @@ _data = {
 &"walking": SubResource("Animation_jej6c")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("p_sprite", "state_machine")]
+[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("sprite", "state_machine", "health_component", "weapon")]
 z_index = 1
 collision_layer = 2
-collision_mask = 17
+collision_mask = 9
 script = ExtResource("1_g2els")
-p_sprite = NodePath("Sprite2D")
+sprite = NodePath("Sprite2D")
 state_machine = NodePath("StateMachine")
+health_component = NodePath("HealthComponent")
+weapon = NodePath("TestWeapon")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=268790705]
 visibility_layer = 0
-position = Vector2(-8, 11)
-occluder = SubResource("OccluderPolygon2D_5yfdf")
+occluder = SubResource("OccluderPolygon2D_bq816")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=846788843]
 texture = ExtResource("2_y4r1p")
 offset = Vector2(0, -2)
 hframes = 6
-frame = 1
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=220740742]
 visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_uxpb3")
+
+[node name="TestWeapon" type="Area2D" parent="." unique_id=1765042513 node_paths=PackedStringArray("hurtbox")]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("3_d2wvv")
+hurtbox = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestWeapon" unique_id=1156642878]
+position = Vector2(9, -2)
+shape = SubResource("RectangleShape2D_rii1s")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=385533668]
 script = ExtResource("3_ur7pv")
@@ -125,14 +141,16 @@ visible = false
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_5yfdf")
 
-[node name="StateMachine" type="Node" parent="." unique_id=1703812370 node_paths=PackedStringArray("character", "current_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=1389153862 node_paths=PackedStringArray("character", "current_state")]
 script = ExtResource("3_qhqgy")
 character = NodePath("..")
 current_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://ctk743jn0ttiy"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1601426793 node_paths=PackedStringArray("rolling_state", "roll_cooldown_timer")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1601426793 node_paths=PackedStringArray("rolling_state", "attack_state", "roll_cooldown_timer")]
 script = ExtResource("4_dqkch")
 rolling_state = NodePath("../Rolling")
+attack_state = NodePath("../Attacking")
 roll_cooldown_timer = NodePath("../Rolling/RollCooldown")
 
 [node name="Rolling" type="Node" parent="StateMachine" unique_id=702436683 node_paths=PackedStringArray("idle_state", "roll_duration_timer", "roll_cooldown_timer")]
@@ -155,6 +173,15 @@ can_move = false
 [node name="Hit" type="Node" parent="StateMachine" unique_id=507577917]
 script = ExtResource("8_ur7pv")
 can_move = false
+
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=332902539 node_paths=PackedStringArray("idle_state", "attack_duration_timer")]
+script = ExtResource("11_3v2ag")
+idle_state = NodePath("../Idle")
+attack_duration_timer = NodePath("AttackDuration")
+can_move = false
+
+[node name="AttackDuration" type="Timer" parent="StateMachine/Attacking" unique_id=1419512071]
+one_shot = true
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1530141892]
 root_node = NodePath(".")

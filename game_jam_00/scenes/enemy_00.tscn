@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cnm00wt2ojqqd"]
 
+[ext_resource type="Script" uid="uid://dxot1qd7fp0h6" path="res://scripts/enemy/enemy_00/enemy_00.gd" id="1_47iip"]
 [ext_resource type="Texture2D" uid="uid://cx6bmmhbdhhjl" path="res://icon.svg" id="1_jc35d"]
 [ext_resource type="Script" uid="uid://dkbomf5xkxumd" path="res://scripts/resources/health_component.gd" id="2_3dgu2"]
 [ext_resource type="Script" uid="uid://bainvlpqjw1h3" path="res://scripts/resources/hitbox_component.gd" id="3_0pc7c"]
@@ -12,9 +13,14 @@ size = Vector2(12, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(12, 12)
 
-[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636]
+[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("state_machine", "health_component")]
+collision_layer = 8
+script = ExtResource("1_47iip")
+state_machine = NodePath("StateMachine")
+health_component = NodePath("HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1511814066]
+self_modulate = Color(0.9999694, 0.31265548, 0.39448527, 1)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_jc35d")
 
@@ -27,15 +33,20 @@ script = ExtResource("2_3dgu2")
 metadata/_custom_type_script = "uid://dkbomf5xkxumd"
 
 [node name="HitboxComponent" type="Area2D" parent="." unique_id=1259340042 node_paths=PackedStringArray("health_component")]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("3_0pc7c")
 health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bainvlpqjw1h3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1147435840]
+visible = false
 shape = SubResource("RectangleShape2D_uxpb3")
 
-[node name="StateMachine" type="Node" parent="." unique_id=1304734705]
+[node name="StateMachine" type="Node" parent="." unique_id=1304734705 node_paths=PackedStringArray("character", "current_state")]
 script = ExtResource("4_yjhhj")
+character = NodePath("..")
+current_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://ctk743jn0ttiy"
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1610090786]
