@@ -28,17 +28,6 @@ energy = 0.5
 shadow_enabled = true
 texture = SubResource("GradientTexture1D_jyhfs")
 
-[node name="Dark" type="CanvasLayer" parent="." unique_id=424566817]
-visible = false
-
-[node name="ColorRect2" type="ColorRect" parent="Dark" unique_id=1209193094]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.04293202, 0.06608497, 0.11890552, 0.23921569)
-
 [node name="Player" parent="." unique_id=291136771 instance=ExtResource("1_o5qli")]
 position = Vector2(83, -26)
 
