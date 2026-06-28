@@ -29,8 +29,10 @@ func _physics_process(delta: float) -> void:
 		velocity = lerp(velocity, dir * SPEED, delta * 2)
 		if prev_dir.x > 0:
 			sprite.flip_h = false
+			weapon.hurtbox.position.x = 6
 		elif prev_dir.x < 0:
 			sprite.flip_h = true
+			weapon.hurtbox.position.x = -6
 		prev_dir = dir
 	else:
 		velocity = lerp(velocity, Vector2.ZERO, delta * 10)
