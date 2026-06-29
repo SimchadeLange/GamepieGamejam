@@ -27,10 +27,9 @@ sprite = NodePath("Sprite2D")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1170061750]
 texture_filter = 1
-position = Vector2(0, 11)
 shadow_enabled = true
 texture = ExtResource("7_ots75")
-offset = Vector2(0, 16)
+offset = Vector2(0, 28)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1511814066]
 self_modulate = Color(0.9999694, 0.31265548, 0.39448527, 1)
@@ -48,8 +47,8 @@ speed = 32.0
 metadata/_custom_type_script = "uid://doiclrfibubxr"
 
 [node name="PathfindingComponent" type="NavigationAgent2D" parent="." unique_id=423569108 node_paths=PackedStringArray("character", "movement_component")]
+path_desired_distance = 40.0
 avoidance_enabled = true
-debug_enabled = true
 script = ExtResource("8_q04cj")
 character = NodePath("..")
 movement_component = NodePath("../MovementComponent")

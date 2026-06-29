@@ -12,7 +12,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	movement_component.movement_process(delta)
 	pathfinding_component.chase_target()
-	
+	$PointLight2D.look_at(-movement_component.dir + global_position)
+	$PointLight2D.rotate(PI / 2)
 	if movement_component.prev_dir.x > 0:
 		sprite.flip_h = false
 	elif movement_component.prev_dir.x < 0:
