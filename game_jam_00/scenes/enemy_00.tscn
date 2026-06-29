@@ -4,21 +4,24 @@
 [ext_resource type="Texture2D" uid="uid://cx6bmmhbdhhjl" path="res://icon.svg" id="1_jc35d"]
 [ext_resource type="Script" uid="uid://dkbomf5xkxumd" path="res://scripts/resources/health_component.gd" id="2_3dgu2"]
 [ext_resource type="Script" uid="uid://bainvlpqjw1h3" path="res://scripts/resources/hitbox_component.gd" id="3_0pc7c"]
+[ext_resource type="Script" uid="uid://doiclrfibubxr" path="res://scripts/resources/movement_component.gd" id="4_hbusj"]
 [ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="4_yjhhj"]
 [ext_resource type="Script" uid="uid://ctb3oc8wewgcl" path="res://scripts/enemy/enemy_00/idle_state.gd" id="5_qpise"]
 [ext_resource type="Texture2D" uid="uid://sdupsunqnsq6" path="res://assets/cone_light.png" id="7_ots75"]
+[ext_resource type="Script" uid="uid://c800y2q6c45cp" path="res://scripts/resources/pathfinding_component.gd" id="8_q04cj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yfdf"]
-size = Vector2(12, 12)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ots75"]
+radius = 6.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(12, 12)
 
-[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("state_machine", "health_component")]
+[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("state_machine", "health_component", "sprite")]
 collision_layer = 8
 script = ExtResource("1_47iip")
 state_machine = NodePath("StateMachine")
 health_component = NodePath("HealthComponent")
+sprite = NodePath("Sprite2D")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1170061750]
 texture_filter = 1
@@ -33,8 +36,14 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_jc35d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=585940616]
-visible = false
-shape = SubResource("RectangleShape2D_5yfdf")
+shape = SubResource("CircleShape2D_ots75")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1888361400 node_paths=PackedStringArray("character", "state_machine")]
+script = ExtResource("4_hbusj")
+character = NodePath("..")
+state_machine = NodePath("../StateMachine")
+speed = 32.0
+metadata/_custom_type_script = "uid://doiclrfibubxr"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1567124381]
 script = ExtResource("2_3dgu2")
@@ -59,3 +68,9 @@ metadata/_custom_type_script = "uid://ctk743jn0ttiy"
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1610090786]
 script = ExtResource("5_qpise")
+
+[node name="PathfindingComponent" type="NavigationAgent2D" parent="." unique_id=423569108 node_paths=PackedStringArray("character", "movement_component")]
+avoidance_enabled = true
+script = ExtResource("8_q04cj")
+character = NodePath("..")
+movement_component = NodePath("../MovementComponent")
