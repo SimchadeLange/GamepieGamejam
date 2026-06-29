@@ -100,6 +100,6 @@ one_shot = true
 [node name="NextWanderTimer" type="Timer" parent="StateMachine/Idle" unique_id=497550205]
 one_shot = true
 
-[node name="Chasing" type="Node" parent="StateMachine" unique_id=1632496936]
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=1632496936 node_paths=PackedStringArray("pathfinding_component")]
 script = ExtResource("11_p24m8")
-can_move = false
+pathfinding_component = NodePath("../../PathfindingComponent")

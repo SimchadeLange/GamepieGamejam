@@ -117,6 +117,7 @@ offset = Vector2(0, -2)
 hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=220740742]
+visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_uxpb3")
 
