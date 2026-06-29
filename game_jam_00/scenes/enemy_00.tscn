@@ -74,5 +74,14 @@ character = NodePath("..")
 current_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://ctk743jn0ttiy"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1610090786]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1610090786 node_paths=PackedStringArray("wander_timer", "next_wander_timer")]
 script = ExtResource("5_qpise")
+wander_timer = NodePath("WanderTimer")
+next_wander_timer = NodePath("NextWanderTimer")
+can_move = false
+
+[node name="WanderTimer" type="Timer" parent="StateMachine/Idle" unique_id=1633906970]
+one_shot = true
+
+[node name="NextWanderTimer" type="Timer" parent="StateMachine/Idle" unique_id=497550205]
+one_shot = true

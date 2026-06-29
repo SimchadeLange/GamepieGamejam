@@ -44,6 +44,7 @@ advance_mode = 2
 advance_expression = "!movement_component.dir"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f1ej7"]
+states/End/position = Vector2(546, 99.55556)
 states/idle/node = SubResource("AnimationNodeAnimation_y4r1p")
 states/idle/position = Vector2(341.66666, 99.11111)
 states/walking/node = SubResource("AnimationNodeAnimation_d2wvv")
