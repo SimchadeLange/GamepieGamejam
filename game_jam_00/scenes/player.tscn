@@ -162,11 +162,12 @@ rolling_state = NodePath("../Rolling")
 attack_state = NodePath("../Attacking")
 roll_cooldown_timer = NodePath("../Rolling/RollCooldown")
 
-[node name="Rolling" type="Node" parent="StateMachine" unique_id=702436683 node_paths=PackedStringArray("idle_state", "roll_duration_timer", "roll_cooldown_timer")]
+[node name="Rolling" type="Node" parent="StateMachine" unique_id=702436683 node_paths=PackedStringArray("idle_state", "roll_duration_timer", "roll_cooldown_timer", "movement_component")]
 script = ExtResource("5_qlg0r")
 idle_state = NodePath("../Idle")
 roll_duration_timer = NodePath("RollDuration")
 roll_cooldown_timer = NodePath("RollCooldown")
+movement_component = NodePath("../../MovementComponent")
 
 [node name="RollDuration" type="Timer" parent="StateMachine/Rolling" unique_id=164356852]
 wait_time = 0.2

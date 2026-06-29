@@ -16,10 +16,12 @@ radius = 6.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(12, 12)
 
-[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("state_machine", "health_component", "sprite")]
+[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("state_machine", "movement_component", "pathfinding_component", "health_component", "sprite")]
 collision_layer = 8
 script = ExtResource("1_47iip")
 state_machine = NodePath("StateMachine")
+movement_component = NodePath("MovementComponent")
+pathfinding_component = NodePath("PathfindingComponent")
 health_component = NodePath("HealthComponent")
 sprite = NodePath("Sprite2D")
 
@@ -45,6 +47,13 @@ state_machine = NodePath("../StateMachine")
 speed = 32.0
 metadata/_custom_type_script = "uid://doiclrfibubxr"
 
+[node name="PathfindingComponent" type="NavigationAgent2D" parent="." unique_id=423569108 node_paths=PackedStringArray("character", "movement_component")]
+avoidance_enabled = true
+debug_enabled = true
+script = ExtResource("8_q04cj")
+character = NodePath("..")
+movement_component = NodePath("../MovementComponent")
+
 [node name="HealthComponent" type="Node" parent="." unique_id=1567124381]
 script = ExtResource("2_3dgu2")
 metadata/_custom_type_script = "uid://dkbomf5xkxumd"
@@ -68,9 +77,3 @@ metadata/_custom_type_script = "uid://ctk743jn0ttiy"
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1610090786]
 script = ExtResource("5_qpise")
-
-[node name="PathfindingComponent" type="NavigationAgent2D" parent="." unique_id=423569108 node_paths=PackedStringArray("character", "movement_component")]
-avoidance_enabled = true
-script = ExtResource("8_q04cj")
-character = NodePath("..")
-movement_component = NodePath("../MovementComponent")

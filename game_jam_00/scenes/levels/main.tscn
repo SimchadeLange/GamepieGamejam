@@ -4,6 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://cll5o11denx7" path="res://scenes/player.tscn" id="2_j4d2a"]
 [ext_resource type="PackedScene" uid="uid://cnm00wt2ojqqd" path="res://scenes/enemy_00.tscn" id="3_u81e1"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6k1if"]
+vertices = PackedVector2Array(124.11719, -93.03125, 126.88281, 131, -137.53906, 131, -127.4375, -93.96094)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-137, -104, 134, -103, 137, 141, -148, 141)])
+
 [node name="Main" type="Node2D" unique_id=1317248791]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=747022573]
@@ -20,7 +25,7 @@ position = Vector2(55, 17)
 position = Vector2(1, -31)
 
 [node name="Player" parent="." unique_id=291136771 instance=ExtResource("2_j4d2a")]
-position = Vector2(1, 34)
+position = Vector2(-55, 23)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=854447935]
 drag_horizontal_enabled = true
@@ -29,3 +34,7 @@ drag_vertical_enabled = true
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1017291919]
 energy = 0.5
 blend_mode = 1
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1571733874]
+position = Vector2(4, 14)
+navigation_polygon = SubResource("NavigationPolygon_6k1if")
