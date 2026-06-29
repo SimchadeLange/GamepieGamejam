@@ -33,7 +33,7 @@ position = Vector2(96, 80)
 position = Vector2(-92, 73)
 
 [node name="Player" parent="." unique_id=291136771 instance=ExtResource("2_j4d2a")]
-position = Vector2(-3, 126)
+position = Vector2(-8, 98)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=854447935]
 drag_horizontal_enabled = true
