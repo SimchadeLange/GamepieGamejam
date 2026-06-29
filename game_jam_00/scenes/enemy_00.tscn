@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bainvlpqjw1h3" path="res://scripts/resources/hitbox_component.gd" id="3_0pc7c"]
 [ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="4_yjhhj"]
 [ext_resource type="Script" uid="uid://ctb3oc8wewgcl" path="res://scripts/enemy/enemy_00/idle_state.gd" id="5_qpise"]
+[ext_resource type="Texture2D" uid="uid://sdupsunqnsq6" path="res://assets/cone_light.png" id="7_ots75"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5yfdf"]
 size = Vector2(12, 12)
@@ -18,6 +19,13 @@ collision_layer = 8
 script = ExtResource("1_47iip")
 state_machine = NodePath("StateMachine")
 health_component = NodePath("HealthComponent")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1170061750]
+texture_filter = 1
+position = Vector2(0, 11)
+shadow_enabled = true
+texture = ExtResource("7_ots75")
+offset = Vector2(0, 16)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1511814066]
 self_modulate = Color(0.9999694, 0.31265548, 0.39448527, 1)

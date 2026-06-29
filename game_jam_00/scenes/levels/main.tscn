@@ -16,17 +16,16 @@ color = Color(0.5205716, 0.49708062, 0.39451304, 1)
 [node name="Building_00" parent="." unique_id=1970538616 instance=ExtResource("1_y0acb")]
 position = Vector2(55, 17)
 
+[node name="Enemy_00" parent="." unique_id=1667096636 instance=ExtResource("3_u81e1")]
+position = Vector2(1, -31)
+
 [node name="Player" parent="." unique_id=291136771 instance=ExtResource("2_j4d2a")]
-position = Vector2(69, -55)
+position = Vector2(1, 34)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=854447935]
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1017291919]
-visible = false
 energy = 0.5
 blend_mode = 1
-
-[node name="Enemy_00" parent="." unique_id=1667096636 instance=ExtResource("3_u81e1")]
-position = Vector2(1, -35)
