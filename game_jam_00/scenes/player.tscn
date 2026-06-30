@@ -1,34 +1,214 @@
 [gd_scene format=3 uid="uid://cll5o11denx7"]
 
-[ext_resource type="Script" uid="uid://bxnod8igdpq6p" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://blaf4h42ftb12" path="res://assets/player_temp.png" id="2_g2els"]
-[ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/statemachine/state_machine.gd" id="3_qhqgy"]
-[ext_resource type="Script" uid="uid://debfixgfwcphs" path="res://scripts/idle_state.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://bxnod8igdpq6p" path="res://scripts/player/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://dkhiagurhw5fw" path="res://assets/player.png" id="2_y4r1p"]
+[ext_resource type="Script" uid="uid://chfe63j6kexn2" path="res://scripts/resources/interact_component.gd" id="3_d2wvv"]
+[ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://dkbomf5xkxumd" path="res://scripts/resources/health_component.gd" id="3_ur7pv"]
+[ext_resource type="Script" uid="uid://debfixgfwcphs" path="res://scripts/player/idle_state.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://doiclrfibubxr" path="res://scripts/resources/movement_component.gd" id="4_jej6c"]
+[ext_resource type="Script" uid="uid://bainvlpqjw1h3" path="res://scripts/resources/hitbox_component.gd" id="4_y4r1p"]
+[ext_resource type="Script" uid="uid://bugqq7br7b5rm" path="res://scripts/player/rolling_state.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://8rm7xyjparas" path="res://scripts/resources/statemachine/state_debug_label.gd" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://cneafiljv3m33" path="res://scripts/player/dead_state.gd" id="7_smehm"]
+[ext_resource type="Script" uid="uid://4blfegepmauf" path="res://scripts/player/hit_state.gd" id="8_ur7pv"]
+[ext_resource type="Script" uid="uid://207f4hdovnwp" path="res://scripts/player/attacking_state.gd" id="11_3v2ag"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bq816"]
+polygon = PackedVector2Array(-3, 2, 3, 2, 6, -2, 3, -9, -3, -9, -5, -6, -6, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(10, 12)
 
-[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("p_sprite", "state_machine")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rii1s"]
+size = Vector2(10, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yfdf"]
+size = Vector2(10, 15)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y4r1p"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d2wvv"]
+animation = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d2wvv"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3v2ag"]
+advance_mode = 2
+advance_expression = "movement_component.dir"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y4r1p"]
+advance_mode = 2
+advance_expression = "!movement_component.dir"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f1ej7"]
+states/End/position = Vector2(546, 99.55556)
+states/idle/node = SubResource("AnimationNodeAnimation_y4r1p")
+states/idle/position = Vector2(341.66666, 99.11111)
+states/walking/node = SubResource("AnimationNodeAnimation_d2wvv")
+states/walking/position = Vector2(341.8889, 1.6666641)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_d2wvv"), "idle", "walking", SubResource("AnimationNodeStateMachineTransition_3v2ag"), "walking", "idle", SubResource("AnimationNodeStateMachineTransition_y4r1p")]
+graph_offset = Vector2(-275, -101)
+
+[sub_resource type="Animation" id="Animation_d2wvv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3v2ag"]
+resource_name = "idle"
+length = 2.000008392938226
+loop_mode = 1
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-7.450581e-09, 0.33333334, 0.6666666, 1, 1.1666667, 1.3333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_jej6c"]
+resource_name = "walking"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jej6c"]
+_data = {
+&"RESET": SubResource("Animation_d2wvv"),
+&"idle": SubResource("Animation_3v2ag"),
+&"walking": SubResource("Animation_jej6c")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("sprite", "anim_tree", "health_component", "movement_component", "interact_component", "state_machine")]
 z_index = 1
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_g2els")
-p_sprite = NodePath("Sprite2D")
+sprite = NodePath("Sprite2D")
+anim_tree = NodePath("AnimationTree")
+health_component = NodePath("HealthComponent")
+movement_component = NodePath("MovementComponent")
+interact_component = NodePath("InteractComponent")
 state_machine = NodePath("StateMachine")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=268790705]
+visibility_layer = 0
+occluder = SubResource("OccluderPolygon2D_bq816")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=846788843]
-texture = ExtResource("2_g2els")
+texture = ExtResource("2_y4r1p")
 offset = Vector2(0, -2)
+hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=220740742]
 visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_uxpb3")
 
-[node name="StateMachine" type="Node" parent="." unique_id=1703812370 node_paths=PackedStringArray("character", "current_state")]
+[node name="InteractComponent" type="Area2D" parent="." unique_id=620239714]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("3_d2wvv")
+metadata/_custom_type_script = "uid://chfe63j6kexn2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1156642878]
+shape = SubResource("RectangleShape2D_rii1s")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1777206012 node_paths=PackedStringArray("character", "state_machine")]
+script = ExtResource("4_jej6c")
+character = NodePath("..")
+state_machine = NodePath("../StateMachine")
+metadata/_custom_type_script = "uid://doiclrfibubxr"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=203205172]
+script = ExtResource("3_ur7pv")
+metadata/_custom_type_script = "uid://dkbomf5xkxumd"
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=1455807782 node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("4_y4r1p")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://bainvlpqjw1h3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1466674768]
+visible = false
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_5yfdf")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1389153862 node_paths=PackedStringArray("character", "current_state")]
 script = ExtResource("3_qhqgy")
 character = NodePath("..")
 current_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://ctk743jn0ttiy"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1601426793]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1601426793 node_paths=PackedStringArray("rolling_state", "attack_state", "roll_cooldown_timer", "interact_component")]
 script = ExtResource("4_dqkch")
+rolling_state = NodePath("../Rolling")
+attack_state = NodePath("../Attacking")
+roll_cooldown_timer = NodePath("../Rolling/RollCooldown")
+interact_component = NodePath("../../InteractComponent")
 
-[node name="Node" type="Node" parent="StateMachine" unique_id=702436683]
+[node name="Rolling" type="Node" parent="StateMachine" unique_id=702436683 node_paths=PackedStringArray("idle_state", "roll_duration_timer", "roll_cooldown_timer", "movement_component")]
+script = ExtResource("5_qlg0r")
+idle_state = NodePath("../Idle")
+roll_duration_timer = NodePath("RollDuration")
+roll_cooldown_timer = NodePath("RollCooldown")
+movement_component = NodePath("../../MovementComponent")
+
+[node name="RollDuration" type="Timer" parent="StateMachine/Rolling" unique_id=164356852]
+wait_time = 0.2
+one_shot = true
+
+[node name="RollCooldown" type="Timer" parent="StateMachine/Rolling" unique_id=514302148]
+one_shot = true
+
+[node name="Dead" type="Node" parent="StateMachine" unique_id=544298561]
+script = ExtResource("7_smehm")
+can_move = false
+
+[node name="Hit" type="Node" parent="StateMachine" unique_id=507577917]
+script = ExtResource("8_ur7pv")
+can_move = false
+
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=332902539 node_paths=PackedStringArray("idle_state", "attack_duration_timer")]
+script = ExtResource("11_3v2ag")
+idle_state = NodePath("../Idle")
+attack_duration_timer = NodePath("AttackDuration")
+can_move = false
+
+[node name="AttackDuration" type="Timer" parent="StateMachine/Attacking" unique_id=1419512071]
+one_shot = true
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1530141892]
+active = false
+root_node = NodePath(".")
+tree_root = SubResource("AnimationNodeStateMachine_f1ej7")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationTree" unique_id=1423208269]
+libraries/ = SubResource("AnimationLibrary_jej6c")
+
+[node name="DebugState" type="Label" parent="." unique_id=824812807 node_paths=PackedStringArray("state_machine")]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("6_tuyoq")
+state_machine = NodePath("../StateMachine")
