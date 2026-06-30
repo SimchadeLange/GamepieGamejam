@@ -12,10 +12,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-143, -103, 134, -103, 
 [node name="Main" type="Node2D" unique_id=1317248791]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=747022573]
-offset_left = -151.0
-offset_top = -152.0
-offset_right = 153.0
-offset_bottom = 152.0
+offset_left = -145.0
+offset_top = -148.0
+offset_right = 159.0
+offset_bottom = 156.0
 color = Color(0.5205716, 0.49708062, 0.39451304, 1)
 
 [node name="Building_00" parent="." unique_id=1970538616 instance=ExtResource("1_y0acb")]

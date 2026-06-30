@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dw3tkgmxt0ahb"]
+
+[ext_resource type="Script" uid="uid://csawtlbp537ih" path="res://title_screen_(control).gd" id="1_ofjql"]
+
+[node name="TitleScreen (Control)" type="Control" unique_id=1590468281]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 125.0
+offset_bottom = 104.0
+script = ExtResource("1_ofjql")
+
+[node name="Background (TextureRect)" type="TextureRect" parent="." unique_id=212720681]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1117271140]
+layout_mode = 0
+offset_right = 121.0
+offset_bottom = 94.0
+focus_neighbor_top = NodePath("VBoxContainer/Start")
+focus_neighbor_bottom = NodePath("VBoxContainer/Exit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1654940197]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="CenterContainer/VBoxContainer" unique_id=239438725]
+custom_minimum_size = Vector2(1, 2)
+layout_mode = 2
+offset_transform_enabled = true
+text = "Start"
+flat = true
+
+[node name="Exit" type="Button" parent="CenterContainer/VBoxContainer" unique_id=155778794]
+layout_mode = 2
+offset_transform_enabled = true
+text = "Exit"
+flat = true
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
