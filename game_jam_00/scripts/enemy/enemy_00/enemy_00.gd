@@ -13,6 +13,7 @@ extends CharacterBody2D
 @export var state_machine: CharacterStateMachine
 @export var chasing_state: State
 @export var attacking_state: State
+@export var dead_state: State
 
 func _ready() -> void:
 	health_component.on_death.connect(dead)
@@ -22,7 +23,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	movement_component.movement_process(delta)
 	
-	if movement_component.dir:
+	if movement_component.dir and spotlight_component:
 		var targetRotation = get_angle_to(-movement_component.dir + global_position)
 		targetRotation += PI / 2
 		spotlight_component.rotation = lerp_angle(spotlight_component.rotation, targetRotation, delta * 4)
@@ -33,11 +34,11 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = true
 
 func _on_player_spotted() -> void:
-	if state_machine.current_state != chasing_state:
+	if state_machine.current_state != chasing_state and movement_component.can_move:
 		state_machine.current_state.next_state = chasing_state
 
 func _in_player_range() -> void:
 	state_machine.current_state.next_state = attacking_state
 
 func dead() -> void:
-	print("dead")
+	state_machine.current_state.next_state = dead_state

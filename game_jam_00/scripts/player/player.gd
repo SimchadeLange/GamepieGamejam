@@ -30,5 +30,5 @@ func _physics_process(delta: float) -> void:
 	elif movement_component.prev_dir.x < 0:
 		sprite.flip_h = true
 	
-	if movement_component.dir:
+	if movement_component.dir and movement_component.can_move:
 		interact_component.position = movement_component.dir.normalized() * 8

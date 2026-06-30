@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c800y2q6c45cp" path="res://scripts/resources/pathfinding_component.gd" id="8_q04cj"]
 [ext_resource type="Script" uid="uid://lu47o1wlcwy6" path="res://scripts/enemy/enemy_00/chasing_state.gd" id="11_p24m8"]
 [ext_resource type="Script" uid="uid://dotvolxpubdjp" path="res://scripts/enemy/enemy_00/attacking_state.gd" id="12_2oc6g"]
+[ext_resource type="Script" uid="uid://xu1pxrogty61" path="res://scripts/enemy/enemy_00/dead_state.gd" id="13_l306i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ots75"]
 radius = 6.0
@@ -19,7 +20,7 @@ radius = 6.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(12, 12)
 
-[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("sprite", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "state_machine", "chasing_state", "attacking_state")]
+[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("sprite", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "state_machine", "chasing_state", "attacking_state", "dead_state")]
 collision_layer = 8
 script = ExtResource("1_47iip")
 sprite = NodePath("Sprite2D")
@@ -30,8 +31,9 @@ health_component = NodePath("HealthComponent")
 state_machine = NodePath("StateMachine")
 chasing_state = NodePath("StateMachine/Chasing")
 attacking_state = NodePath("StateMachine/Attacking")
+dead_state = NodePath("StateMachine/Dead")
 
-[node name="SpotlightComponent" type="PointLight2D" parent="." unique_id=1170061750 node_paths=PackedStringArray("movement_component", "light_area")]
+[node name="SpotlightComponent" type="PointLight2D" parent="." unique_id=806071600 node_paths=PackedStringArray("movement_component", "light_area")]
 texture_filter = 1
 shadow_enabled = true
 texture = ExtResource("7_ots75")
@@ -39,6 +41,7 @@ offset = Vector2(0, 28)
 script = ExtResource("3_2lxw6")
 movement_component = NodePath("../MovementComponent")
 light_area = NodePath("Area2D")
+metadata/_custom_type_script = "uid://d2x30iqu2oy5u"
 
 [node name="Area2D" type="Area2D" parent="SpotlightComponent" unique_id=942178518]
 visible = false
@@ -63,15 +66,17 @@ state_machine = NodePath("../StateMachine")
 speed = 32.0
 metadata/_custom_type_script = "uid://doiclrfibubxr"
 
-[node name="PathfindingComponent" type="NavigationAgent2D" parent="." unique_id=423569108 node_paths=PackedStringArray("character", "movement_component")]
+[node name="PathfindingComponent" type="NavigationAgent2D" parent="." unique_id=1155631839 node_paths=PackedStringArray("character", "movement_component")]
 target_desired_distance = 40.0
 avoidance_enabled = true
 script = ExtResource("8_q04cj")
 character = NodePath("..")
 movement_component = NodePath("../MovementComponent")
+metadata/_custom_type_script = "uid://c800y2q6c45cp"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1567124381]
 script = ExtResource("2_3dgu2")
+health = 5
 metadata/_custom_type_script = "uid://dkbomf5xkxumd"
 
 [node name="HitboxComponent" type="Area2D" parent="." unique_id=1259340042 node_paths=PackedStringArray("health_component")]
@@ -117,3 +122,8 @@ can_move = false
 
 [node name="AttackDurationTimer" type="Timer" parent="StateMachine/Attacking" unique_id=448910545]
 one_shot = true
+
+[node name="Dead" type="Node" parent="StateMachine" unique_id=927314862 node_paths=PackedStringArray("spotlight_component")]
+script = ExtResource("13_l306i")
+spotlight_component = NodePath("../../SpotlightComponent")
+can_move = false

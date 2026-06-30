@@ -12,3 +12,4 @@ func damage(attack: Attack) -> void:
 		on_damage.emit(attack)
 	else:
 		on_death.emit()
+		queue_free()

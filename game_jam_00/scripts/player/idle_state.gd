@@ -18,7 +18,9 @@ func state_input(event : InputEvent):
 	if event.is_action_pressed("roll") and character.can_roll:
 		next_state = rolling_state
 	elif event.is_action_pressed("interact") and interact_component.in_interactable:
-		interact_component.in_interactable.interact()
+		if interact_component.in_interactable.health_component:
+			next_state = attack_state
+		#interact_component.in_interactable.interact()
 
 func _on_roll_cooldown_timeout() -> void:
 	character.can_roll = true
