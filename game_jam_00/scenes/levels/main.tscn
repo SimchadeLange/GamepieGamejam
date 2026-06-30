@@ -12,10 +12,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-143, -103, 134, -103, 
 [node name="Main" type="Node2D" unique_id=1317248791]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=747022573]
-offset_left = -151.0
-offset_top = -152.0
-offset_right = 153.0
-offset_bottom = 152.0
+offset_left = -279.0
+offset_top = -247.0
+offset_right = 321.0
+offset_bottom = 231.0
 color = Color(0.5205716, 0.49708062, 0.39451304, 1)
 
 [node name="Building_00" parent="." unique_id=1970538616 instance=ExtResource("1_y0acb")]
@@ -33,7 +33,7 @@ position = Vector2(96, 80)
 position = Vector2(-92, 73)
 
 [node name="Player" parent="." unique_id=291136771 instance=ExtResource("2_j4d2a")]
-position = Vector2(-8, 98)
+position = Vector2(-28, 107)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=854447935]
 drag_horizontal_enabled = true
