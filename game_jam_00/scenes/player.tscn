@@ -138,6 +138,7 @@ metadata/_custom_type_script = "uid://doiclrfibubxr"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=203205172]
 script = ExtResource("3_ur7pv")
+health = 10
 metadata/_custom_type_script = "uid://dkbomf5xkxumd"
 
 [node name="HitboxComponent" type="Area2D" parent="." unique_id=1455807782 node_paths=PackedStringArray("health_component")]
