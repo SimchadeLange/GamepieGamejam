@@ -1,34 +1,119 @@
 [gd_scene format=3 uid="uid://cr7wvbadmtug7"]
 
 [ext_resource type="PackedScene" uid="uid://cll5o11denx7" path="res://scenes/player.tscn" id="1_bvxu8"]
+[ext_resource type="Texture2D" uid="uid://b31jlqjufsk7a" path="res://assets/basicGuard.png" id="2_2nwr0"]
+
+[sub_resource type="SystemFont" id="SystemFont_2nwr0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bvxu8"]
+font = SubResource("SystemFont_2nwr0")
+font_size = 9
 
 [node name="level00" type="Node2D" unique_id=738375304]
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=1467181285]
-offset_left = 75.0
-offset_top = -100.0
-offset_right = 300.0
-offset_bottom = -17.0
+[node name="floor" type="ColorRect" parent="." unique_id=2097033674]
+modulate = Color(0.18431373, 0.14509805, 0.35686275, 1)
+offset_left = -344.0
+offset_top = -143.0
+offset_right = 604.0
+offset_bottom = 102.0
 
-[node name="dsda" type="ColorRect" parent="." unique_id=2010522234]
-offset_left = 59.0
-offset_top = -28.0
-offset_right = 64.0
-offset_bottom = -17.0
+[node name="Label3" type="Label" parent="." unique_id=794106336]
+offset_left = -219.0
+offset_top = -32.0
+offset_right = 78.0
+offset_bottom = -9.0
+scale = Vector2(0.44417894, 0.47885278)
+text = "press q to corrupt the villager"
+label_settings = SubResource("LabelSettings_bvxu8")
 
-[node name="ColorRect4" type="ColorRect" parent="." unique_id=595944476]
-offset_left = 403.0
-offset_top = -128.0
-offset_right = 533.0
-offset_bottom = -40.0
+[node name="house2" type="ColorRect" parent="." unique_id=666037899]
+offset_left = 60.0
+offset_top = 4.0
+offset_right = 295.0
+offset_bottom = 99.0
+color = Color(0.61960787, 0.47058824, 0.41960785, 1)
+
+[node name="house" type="ColorRect" parent="." unique_id=1467181285]
+offset_left = 61.0
+offset_top = -138.0
+offset_right = 296.0
+offset_bottom = -43.0
+color = Color(0.61960787, 0.47058824, 0.41960785, 1)
+
+[node name="torch" type="ColorRect" parent="." unique_id=2010522234]
+offset_left = -2.0
+offset_top = -23.0
+offset_right = 3.0
+offset_bottom = -12.0
+
+[node name="box" type="ColorRect" parent="." unique_id=595944476]
+offset_left = 299.0
+offset_top = -6.0
+offset_right = 317.0
+offset_bottom = 21.0
+color = Color(0.69803923, 0.40784314, 0.0627451, 1)
+
+[node name="box2" type="ColorRect" parent="." unique_id=1147280394]
+offset_left = 40.0
+offset_top = -71.0
+offset_right = 58.0
+offset_bottom = -44.0
+color = Color(0.69803923, 0.40784314, 0.0627451, 1)
+
+[node name="box3" type="ColorRect" parent="." unique_id=1845576331]
+offset_left = 298.0
+offset_top = -65.0
+offset_right = 316.0
+offset_bottom = -38.0
+color = Color(0.69803923, 0.40784314, 0.0627451, 1)
+
+[node name="box4" type="ColorRect" parent="." unique_id=1556179475]
+offset_left = 375.0
+offset_top = -105.0
+offset_right = 393.0
+offset_bottom = -78.0
+color = Color(0.69803923, 0.40784314, 0.0627451, 1)
+
+[node name="box5" type="ColorRect" parent="." unique_id=1116535915]
+offset_left = 932.0
+offset_top = -23.0
+offset_right = 950.0
+offset_bottom = 4.0
+color = Color(0.69803923, 0.40784314, 0.0627451, 1)
 
 [node name="Player" parent="." unique_id=291136771 instance=ExtResource("1_bvxu8")]
+position = Vector2(-225, -7)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=747771882]
 
+[node name="oil lamp" type="ColorRect" parent="." unique_id=1446396956]
+offset_left = 398.0
+offset_top = -96.0
+offset_right = 403.0
+offset_bottom = -85.0
+color = Color(1, 1, 0.1764706, 1)
+
 [node name="Label" type="Label" parent="." unique_id=1778200192]
-offset_left = -158.0
-offset_top = -83.0
-offset_right = 143.0
-offset_bottom = -60.0
-text = "inter act with the torch to dim the light"
+offset_left = -107.0
+offset_top = -30.0
+offset_right = 190.0
+offset_bottom = -7.0
+scale = Vector2(0.44417894, 0.47885278)
+text = "interact with the torch to dim the light"
+label_settings = SubResource("LabelSettings_bvxu8")
+
+[node name="BasicGuard" type="Sprite2D" parent="." unique_id=1072602096]
+position = Vector2(-152.75, -12)
+scale = Vector2(0.6, 0.678)
+texture = ExtResource("2_2nwr0")
+
+[node name="BasicGuard2" type="Sprite2D" parent="." unique_id=1479409773]
+position = Vector2(110.24219, -11.468751)
+scale = Vector2(0.6, 0.737)
+texture = ExtResource("2_2nwr0")
+
+[node name="BasicGuard4" type="Sprite2D" parent="." unique_id=942595095]
+position = Vector2(340.99997, -100)
+scale = Vector2(0.6, 0.737)
+texture = ExtResource("2_2nwr0")
