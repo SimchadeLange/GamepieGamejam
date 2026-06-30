@@ -21,10 +21,12 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	movement_component.movement_process(delta)
+	
 	if movement_component.dir:
 		var targetRotation = get_angle_to(-movement_component.dir + global_position)
 		targetRotation += PI / 2
 		spotlight_component.rotation = lerp_angle(spotlight_component.rotation, targetRotation, delta * 4)
+	
 	if movement_component.prev_dir.x > 0:
 		sprite.flip_h = false
 	elif movement_component.prev_dir.x < 0:
