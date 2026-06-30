@@ -3,11 +3,15 @@ extends CharacterBody2D
 class_name Player
 
 @export var sprite: Sprite2D
-@export var state_machine: CharacterStateMachine
 @export var anim_tree: AnimationTree
-@export var movement_component: MovementComponent
+
+@export_category("Components")
 @export var health_component: HealthComponent
-@export var weapon: Weapon
+@export var movement_component: MovementComponent
+@export var interact_component: InteractComponent
+
+@export_category("States")
+@export var state_machine: CharacterStateMachine
 
 var can_roll: bool = true
 
@@ -23,7 +27,8 @@ func _physics_process(delta: float) -> void:
 	
 	if movement_component.prev_dir.x > 0:
 		sprite.flip_h = false
-		weapon.hurtbox.position.x = 6
 	elif movement_component.prev_dir.x < 0:
 		sprite.flip_h = true
-		weapon.hurtbox.position.x = -6
+	
+	if movement_component.dir:
+		interact_component.position = movement_component.dir.normalized() * 8

@@ -26,4 +26,4 @@ func wait_for_wander() -> void:
 func wander() -> void:
 	wander_timer.wait_time = randf_range(min_wander_time, max_wander_time)
 	wander_timer.start()
-	movement_component.dir = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
+	movement_component.dir = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized()

@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://sdupsunqnsq6" path="res://assets/cone_light.png" id="7_ots75"]
 [ext_resource type="Script" uid="uid://c800y2q6c45cp" path="res://scripts/resources/pathfinding_component.gd" id="8_q04cj"]
 [ext_resource type="Script" uid="uid://lu47o1wlcwy6" path="res://scripts/enemy/enemy_00/chasing_state.gd" id="11_p24m8"]
+[ext_resource type="Script" uid="uid://dotvolxpubdjp" path="res://scripts/enemy/enemy_00/attacking_state.gd" id="12_2oc6g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ots75"]
 radius = 6.0
@@ -18,16 +19,17 @@ radius = 6.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(12, 12)
 
-[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("state_machine", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "sprite", "chasing_state")]
+[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("sprite", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "state_machine", "chasing_state", "attacking_state")]
 collision_layer = 8
 script = ExtResource("1_47iip")
-state_machine = NodePath("StateMachine")
+sprite = NodePath("Sprite2D")
 movement_component = NodePath("MovementComponent")
 pathfinding_component = NodePath("PathfindingComponent")
 spotlight_component = NodePath("SpotlightComponent")
 health_component = NodePath("HealthComponent")
-sprite = NodePath("Sprite2D")
+state_machine = NodePath("StateMachine")
 chasing_state = NodePath("StateMachine/Chasing")
+attacking_state = NodePath("StateMachine/Attacking")
 
 [node name="SpotlightComponent" type="PointLight2D" parent="." unique_id=1170061750 node_paths=PackedStringArray("movement_component", "light_area")]
 texture_filter = 1
@@ -39,6 +41,7 @@ movement_component = NodePath("../MovementComponent")
 light_area = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="SpotlightComponent" unique_id=942178518]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -61,7 +64,7 @@ speed = 32.0
 metadata/_custom_type_script = "uid://doiclrfibubxr"
 
 [node name="PathfindingComponent" type="NavigationAgent2D" parent="." unique_id=423569108 node_paths=PackedStringArray("character", "movement_component")]
-path_desired_distance = 40.0
+target_desired_distance = 40.0
 avoidance_enabled = true
 script = ExtResource("8_q04cj")
 character = NodePath("..")
@@ -72,14 +75,15 @@ script = ExtResource("2_3dgu2")
 metadata/_custom_type_script = "uid://dkbomf5xkxumd"
 
 [node name="HitboxComponent" type="Area2D" parent="." unique_id=1259340042 node_paths=PackedStringArray("health_component")]
+visible = false
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("3_0pc7c")
 health_component = NodePath("../HealthComponent")
+is_interactable = true
 metadata/_custom_type_script = "uid://bainvlpqjw1h3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1147435840]
-visible = false
 shape = SubResource("RectangleShape2D_uxpb3")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1304734705 node_paths=PackedStringArray("character", "current_state")]
@@ -100,6 +104,16 @@ one_shot = true
 [node name="NextWanderTimer" type="Timer" parent="StateMachine/Idle" unique_id=497550205]
 one_shot = true
 
-[node name="Chasing" type="Node" parent="StateMachine" unique_id=1632496936 node_paths=PackedStringArray("pathfinding_component")]
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=1632496936 node_paths=PackedStringArray("pathfinding_component", "movement_component")]
 script = ExtResource("11_p24m8")
 pathfinding_component = NodePath("../../PathfindingComponent")
+movement_component = NodePath("../../MovementComponent")
+
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=775203745 node_paths=PackedStringArray("attack_duration_timer", "chasing_state")]
+script = ExtResource("12_2oc6g")
+attack_duration_timer = NodePath("AttackDurationTimer")
+chasing_state = NodePath("../Chasing")
+can_move = false
+
+[node name="AttackDurationTimer" type="Timer" parent="StateMachine/Attacking" unique_id=448910545]
+one_shot = true
