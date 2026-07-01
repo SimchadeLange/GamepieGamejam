@@ -3,11 +3,12 @@ extends CharacterBody2D
 
 @export var sprite: Sprite2D
 
-@export_category("Components")
+@export_category("Components") 
 @export var movement_component: MovementComponent
 @export var pathfinding_component: PathfindingComponent
 @export var spotlight_component: SpotlightComponent
 @export var health_component: HealthComponent
+@export var attack_component: AttackComponent
 
 @export_category("States")
 @export var state_machine: CharacterStateMachine
@@ -23,10 +24,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	movement_component.movement_process(delta)
 	
-	if movement_component.dir and spotlight_component:
-		var targetRotation = get_angle_to(-movement_component.dir + global_position)
-		targetRotation += PI / 2
-		spotlight_component.rotation = lerp_angle(spotlight_component.rotation, targetRotation, delta * 4)
+	if movement_component.dir:
+		if spotlight_component:
+			var targetRotation = get_angle_to(-movement_component.dir + global_position)
+			targetRotation += PI / 2
+			spotlight_component.rotation = lerp_angle(spotlight_component.rotation, targetRotation, delta * 4)
+		attack_component.position = movement_component.dir.normalized() * 16
+
 	
 	if movement_component.prev_dir.x > 0:
 		sprite.flip_h = false
