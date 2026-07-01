@@ -4,3 +4,4 @@ extends Node
 signal has_player
 
 var player: Player
+var available_players: Array[Player]
