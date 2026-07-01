@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cnm00wt2ojqqd" path="res://scenes/guard.tscn" id="3_u81e1"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6k1if"]
-vertices = PackedVector2Array(165.02344, -158.17969, 205.8125, 208.92188, -235.10156, 206.07031, -202.84375, -165.79688)
+vertices = PackedVector2Array(165.02344, -158.17969, 205.8125, 208.92188, -236.36719, 206.0625, -250.60156, -166.78125)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-212, -176, 174, -168, 217, 219, -246, 216)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-261, -177, 174, -168, 217, 219, -246, 216)])
 
 [node name="Main" type="Node2D" unique_id=1317248791]
 
