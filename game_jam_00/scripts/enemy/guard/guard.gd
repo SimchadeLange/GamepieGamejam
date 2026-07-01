@@ -21,7 +21,8 @@ func _ready() -> void:
 	health_component.on_death.connect(dead)
 	spotlight_component.target_spotted.connect(on_player_spotted)
 	pathfinding_component.target_reached.connect(_in_player_range)
-	await Globals.has_player
+	if !Globals.player:
+		await Globals.has_player
 	pathfinding_component.target = Globals.player
 
 func _physics_process(delta: float) -> void:

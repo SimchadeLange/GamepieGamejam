@@ -14,6 +14,3 @@ func state_process(_delta: float) -> void:
 
 func on_exit() -> void:
 	movement_component.speed_multiplier = 1.0
-
-func _on_attack_cooldown_timeout() -> void:
-	character.can_attack = true

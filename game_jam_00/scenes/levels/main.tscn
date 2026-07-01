@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bnvbo5wjckmcc" path="res://scenes/building_00.tscn" id="1_y0acb"]
 [ext_resource type="PackedScene" uid="uid://cll5o11denx7" path="res://scenes/player.tscn" id="2_j4d2a"]
+[ext_resource type="PackedScene" uid="uid://bns6iq1g6d153" path="res://scenes/villager.tscn" id="3_j4d2a"]
 [ext_resource type="PackedScene" uid="uid://cnm00wt2ojqqd" path="res://scenes/guard.tscn" id="3_u81e1"]
-[ext_resource type="PackedScene" uid="uid://bns6iq1g6d153" path="res://scenes/enemy_01.tscn" id="4_j4d2a"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6k1if"]
 vertices = PackedVector2Array(165.02344, -158.17969, 205.8125, 208.92188, -235.10156, 206.07031, -202.84375, -165.79688)
@@ -21,18 +21,6 @@ color = Color(0.5205716, 0.49708062, 0.39451304, 1)
 
 [node name="Building_00" parent="." unique_id=1970538616 instance=ExtResource("1_y0acb")]
 
-[node name="Enemy_00" parent="." unique_id=1667096636 instance=ExtResource("3_u81e1")]
-position = Vector2(-88, -101)
-
-[node name="Enemy_01" parent="." unique_id=1489843272 instance=ExtResource("3_u81e1")]
-position = Vector2(99, -101)
-
-[node name="Enemy_02" parent="." unique_id=1751591517 instance=ExtResource("3_u81e1")]
-position = Vector2(96, 80)
-
-[node name="Enemy_03" parent="." unique_id=643223736 instance=ExtResource("3_u81e1")]
-position = Vector2(-92, 73)
-
 [node name="Player" parent="." unique_id=291136771 instance=ExtResource("2_j4d2a")]
 position = Vector2(-28, 107)
 
@@ -45,8 +33,16 @@ energy = 0.4
 blend_mode = 1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1571733874]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_6k1if")
 
-[node name="Enemy_04" parent="." unique_id=1735809285 instance=ExtResource("4_j4d2a")]
-position = Vector2(8, 46)
+[node name="Villager" parent="." unique_id=1667096636 instance=ExtResource("3_j4d2a")]
+position = Vector2(-72, 59)
+
+[node name="Guard" parent="." unique_id=1285834276 instance=ExtResource("3_u81e1")]
+position = Vector2(70, 37)
+
+[node name="Guard2" parent="." unique_id=1861558563 instance=ExtResource("3_u81e1")]
+position = Vector2(-123, -19)
+
+[node name="Guard3" parent="." unique_id=1958787251 instance=ExtResource("3_u81e1")]
+position = Vector2(-167, 157)

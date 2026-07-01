@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bns6iq1g6d153"]
 
-[ext_resource type="Script" uid="uid://bwavernbtwpbo" path="res://scripts/enemy/guard/enemy_01.gd" id="1_il2p4"]
+[ext_resource type="Script" uid="uid://bwavernbtwpbo" path="res://scripts/enemy/villager/villager.gd" id="1_il2p4"]
 [ext_resource type="Texture2D" uid="uid://sdupsunqnsq6" path="res://assets/cone_light.png" id="2_lq8o4"]
 [ext_resource type="Script" uid="uid://d2x30iqu2oy5u" path="res://scripts/resources/spotlight_component.gd" id="3_mrrc1"]
 [ext_resource type="Texture2D" uid="uid://cx6bmmhbdhhjl" path="res://icon.svg" id="4_q8axu"]
@@ -9,10 +9,10 @@
 [ext_resource type="Script" uid="uid://dkbomf5xkxumd" path="res://scripts/resources/health_component.gd" id="7_8btur"]
 [ext_resource type="Script" uid="uid://bainvlpqjw1h3" path="res://scripts/resources/hitbox_component.gd" id="9_fswh7"]
 [ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="10_mtdwh"]
-[ext_resource type="Script" uid="uid://dfhsu6cm65h15" path="res://scripts/enemy/guard/idle_state.gd" id="11_il2p4"]
-[ext_resource type="Script" uid="uid://pkorpd2sjxks" path="res://scripts/enemy/guard/running_state.gd" id="12_e1vov"]
-[ext_resource type="Script" uid="uid://hue00pki4q8e" path="res://scripts/enemy/guard/dead_state.gd" id="13_il2p4"]
-[ext_resource type="Script" uid="uid://dboke2c01urxy" path="res://scripts/enemy/guard/waiting_state.gd" id="14_e1vov"]
+[ext_resource type="Script" uid="uid://dfhsu6cm65h15" path="res://scripts/enemy/villager/idle_state.gd" id="11_il2p4"]
+[ext_resource type="Script" uid="uid://pkorpd2sjxks" path="res://scripts/enemy/villager/running_state.gd" id="12_e1vov"]
+[ext_resource type="Script" uid="uid://hue00pki4q8e" path="res://scripts/enemy/villager/dead_state.gd" id="13_il2p4"]
+[ext_resource type="Script" uid="uid://dboke2c01urxy" path="res://scripts/enemy/villager/waiting_state.gd" id="14_e1vov"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ots75"]
 radius = 6.0
@@ -20,7 +20,7 @@ radius = 6.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(12, 12)
 
-[node name="Enemy_01" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("sprite", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "state_machine", "running_state", "dead_state", "waiting_state")]
+[node name="Villager" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("sprite", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "state_machine", "running_state", "dead_state", "waiting_state")]
 collision_layer = 8
 script = ExtResource("1_il2p4")
 sprite = NodePath("Sprite2D")
