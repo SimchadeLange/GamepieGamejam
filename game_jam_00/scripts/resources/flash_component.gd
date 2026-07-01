@@ -2,9 +2,9 @@ extends Node
 
 class_name FlashComponent
 
-@export var sprites: Array[Sprite2D]
 @export var flicker_time: float = 0.1
 var flash_timer := Timer.new()
+@export var sprites: Array[Sprite2D]
 
 func _ready() -> void:
 	flash_timer.wait_time = flicker_time

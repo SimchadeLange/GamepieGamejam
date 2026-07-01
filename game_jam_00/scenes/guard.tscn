@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://cnm00wt2ojqqd"]
+
+[ext_resource type="Script" uid="uid://dxot1qd7fp0h6" path="res://scripts/enemy/enemy_00/enemy_00.gd" id="1_47iip"]
+[ext_resource type="Texture2D" uid="uid://cx6bmmhbdhhjl" path="res://icon.svg" id="1_jc35d"]
+[ext_resource type="Script" uid="uid://dkbomf5xkxumd" path="res://scripts/resources/health_component.gd" id="2_3dgu2"]
+[ext_resource type="Script" uid="uid://bainvlpqjw1h3" path="res://scripts/resources/hitbox_component.gd" id="3_0pc7c"]
+[ext_resource type="Script" uid="uid://d2x30iqu2oy5u" path="res://scripts/resources/spotlight_component.gd" id="3_2lxw6"]
+[ext_resource type="Script" uid="uid://doiclrfibubxr" path="res://scripts/resources/movement_component.gd" id="4_hbusj"]
+[ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="4_yjhhj"]
+[ext_resource type="Script" uid="uid://ctb3oc8wewgcl" path="res://scripts/enemy/enemy_00/idle_state.gd" id="5_qpise"]
+[ext_resource type="Texture2D" uid="uid://sdupsunqnsq6" path="res://assets/cone_light.png" id="7_ots75"]
+[ext_resource type="Script" uid="uid://0carti3rffau" path="res://scripts/resources/attack_component.gd" id="8_fv36i"]
+[ext_resource type="Script" uid="uid://c800y2q6c45cp" path="res://scripts/resources/pathfinding_component.gd" id="8_q04cj"]
+[ext_resource type="Script" uid="uid://lu47o1wlcwy6" path="res://scripts/enemy/enemy_00/chasing_state.gd" id="11_p24m8"]
+[ext_resource type="Script" uid="uid://dotvolxpubdjp" path="res://scripts/enemy/enemy_00/attacking_state.gd" id="12_2oc6g"]
+[ext_resource type="Script" uid="uid://xu1pxrogty61" path="res://scripts/enemy/enemy_00/dead_state.gd" id="13_l306i"]
+[ext_resource type="Script" uid="uid://8rm7xyjparas" path="res://scripts/resources/statemachine/state_debug_label.gd" id="15_vuaq3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ots75"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6k1if"]
+size = Vector2(20.5, 21.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
+size = Vector2(12, 12)
+
+[node name="Guard" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("sprite", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "attack_component", "state_machine", "chasing_state", "attacking_state", "dead_state") groups=["Guards"]]
+collision_layer = 8
+script = ExtResource("1_47iip")
+sprite = NodePath("Sprite2D")
+movement_component = NodePath("MovementComponent")
+pathfinding_component = NodePath("PathfindingComponent")
+spotlight_component = NodePath("SpotlightComponent")
+health_component = NodePath("HealthComponent")
+attack_component = NodePath("AttackComponent")
+state_machine = NodePath("StateMachine")
+chasing_state = NodePath("StateMachine/Chasing")
+attacking_state = NodePath("StateMachine/Attacking")
+dead_state = NodePath("StateMachine/Dead")
+
+[node name="SpotlightComponent" type="PointLight2D" parent="." unique_id=806071600 node_paths=PackedStringArray("movement_component", "light_area")]
+texture_filter = 1
+shadow_enabled = true
+texture = ExtResource("7_ots75")
+offset = Vector2(0, 28)
+script = ExtResource("3_2lxw6")
+movement_component = NodePath("../MovementComponent")
+light_area = NodePath("Area2D")
+metadata/_custom_type_script = "uid://d2x30iqu2oy5u"
+
+[node name="Area2D" type="Area2D" parent="SpotlightComponent" unique_id=942178518]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="SpotlightComponent/Area2D" unique_id=458204900]
+polygon = PackedVector2Array(0, 0, -24, 51, 24, 51)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1511814066]
+self_modulate = Color(0.9999694, 0.31265548, 0.39448527, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_jc35d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=585940616]
+visible = false
+shape = SubResource("CircleShape2D_ots75")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1888361400 node_paths=PackedStringArray("character", "state_machine")]
+script = ExtResource("4_hbusj")
+character = NodePath("..")
+state_machine = NodePath("../StateMachine")
+speed = 32.0
+metadata/_custom_type_script = "uid://doiclrfibubxr"
+
+[node name="PathfindingComponent" type="NavigationAgent2D" parent="." unique_id=1155631839 node_paths=PackedStringArray("character", "movement_component")]
+target_desired_distance = 20.0
+avoidance_enabled = true
+script = ExtResource("8_q04cj")
+character = NodePath("..")
+movement_component = NodePath("../MovementComponent")
+metadata/_custom_type_script = "uid://c800y2q6c45cp"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1567124381]
+script = ExtResource("2_3dgu2")
+health = 5
+metadata/_custom_type_script = "uid://dkbomf5xkxumd"
+
+[node name="AttackComponent" type="Area2D" parent="." unique_id=530134624]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("8_fv36i")
+metadata/_custom_type_script = "uid://0carti3rffau"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent" unique_id=527256774]
+shape = SubResource("RectangleShape2D_6k1if")
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=1259340042 node_paths=PackedStringArray("health_component")]
+visible = false
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_0pc7c")
+health_component = NodePath("../HealthComponent")
+is_interactable = true
+metadata/_custom_type_script = "uid://bainvlpqjw1h3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1147435840]
+shape = SubResource("RectangleShape2D_uxpb3")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1304734705 node_paths=PackedStringArray("character", "current_state")]
+script = ExtResource("4_yjhhj")
+character = NodePath("..")
+current_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://ctk743jn0ttiy"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1610090786 node_paths=PackedStringArray("movement_component", "wander_timer", "next_wander_timer")]
+script = ExtResource("5_qpise")
+movement_component = NodePath("../../MovementComponent")
+wander_timer = NodePath("WanderTimer")
+next_wander_timer = NodePath("NextWanderTimer")
+
+[node name="WanderTimer" type="Timer" parent="StateMachine/Idle" unique_id=1633906970]
+one_shot = true
+
+[node name="NextWanderTimer" type="Timer" parent="StateMachine/Idle" unique_id=497550205]
+one_shot = true
+
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=1632496936 node_paths=PackedStringArray("pathfinding_component", "movement_component", "idle_state")]
+script = ExtResource("11_p24m8")
+pathfinding_component = NodePath("../../PathfindingComponent")
+movement_component = NodePath("../../MovementComponent")
+idle_state = NodePath("../Idle")
+
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=775203745 node_paths=PackedStringArray("attack_component", "pathfinding_component", "attack_duration_timer", "attack_cooldown_timer", "chasing_state")]
+script = ExtResource("12_2oc6g")
+attack_component = NodePath("../../AttackComponent")
+pathfinding_component = NodePath("../../PathfindingComponent")
+attack_duration_timer = NodePath("AttackDurationTimer")
+attack_cooldown_timer = NodePath("AttackCooldownTimer")
+chasing_state = NodePath("../Chasing")
+can_move = false
+
+[node name="AttackDurationTimer" type="Timer" parent="StateMachine/Attacking" unique_id=448910545]
+wait_time = 0.3
+one_shot = true
+
+[node name="AttackCooldownTimer" type="Timer" parent="StateMachine/Attacking" unique_id=1664227346]
+one_shot = true
+
+[node name="Dead" type="Node" parent="StateMachine" unique_id=927314862 node_paths=PackedStringArray("spotlight_component")]
+script = ExtResource("13_l306i")
+spotlight_component = NodePath("../../SpotlightComponent")
+can_move = false
+
+[node name="StateDebugLabel" type="Label" parent="." unique_id=391365305 node_paths=PackedStringArray("state_machine")]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("15_vuaq3")
+state_machine = NodePath("../StateMachine")

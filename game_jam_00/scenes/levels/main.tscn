@@ -2,20 +2,21 @@
 
 [ext_resource type="PackedScene" uid="uid://bnvbo5wjckmcc" path="res://scenes/building_00.tscn" id="1_y0acb"]
 [ext_resource type="PackedScene" uid="uid://cll5o11denx7" path="res://scenes/player.tscn" id="2_j4d2a"]
-[ext_resource type="PackedScene" uid="uid://cnm00wt2ojqqd" path="res://scenes/enemy_00.tscn" id="3_u81e1"]
+[ext_resource type="PackedScene" uid="uid://cnm00wt2ojqqd" path="res://scenes/guard.tscn" id="3_u81e1"]
+[ext_resource type="PackedScene" uid="uid://bns6iq1g6d153" path="res://scenes/enemy_01.tscn" id="4_j4d2a"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6k1if"]
-vertices = PackedVector2Array(126.88281, 131, -137.78906, 131, -133.20313, -93, 124.11719, -93)
+vertices = PackedVector2Array(165.02344, -158.17969, 205.8125, 208.92188, -235.10156, 206.07031, -202.84375, -165.79688)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-143, -103, 134, -103, 137, 141, -148, 141)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-212, -176, 174, -168, 217, 219, -246, 216)])
 
 [node name="Main" type="Node2D" unique_id=1317248791]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=747022573]
-offset_left = -279.0
-offset_top = -247.0
-offset_right = 321.0
-offset_bottom = 231.0
+offset_left = -300.0
+offset_top = -239.0
+offset_right = 300.0
+offset_bottom = 239.0
 color = Color(0.5205716, 0.49708062, 0.39451304, 1)
 
 [node name="Building_00" parent="." unique_id=1970538616 instance=ExtResource("1_y0acb")]
@@ -45,5 +46,7 @@ blend_mode = 1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1571733874]
 visible = false
-position = Vector2(4, 14)
 navigation_polygon = SubResource("NavigationPolygon_6k1if")
+
+[node name="Enemy_04" parent="." unique_id=1735809285 instance=ExtResource("4_j4d2a")]
+position = Vector2(8, 46)

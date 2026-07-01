@@ -2,11 +2,10 @@ extends State
 
 @export var pathfinding_component: PathfindingComponent
 @export var movement_component: MovementComponent
-
 @export var idle_state: State
 
 func on_enter() -> void:
-	movement_component.speed_multiplier = 1.75
+	movement_component.speed_multiplier = 2.0
 
 func state_process(_delta: float) -> void:
 	pathfinding_component.chase_target()
@@ -15,3 +14,6 @@ func state_process(_delta: float) -> void:
 
 func on_exit() -> void:
 	movement_component.speed_multiplier = 1.0
+
+func _on_attack_cooldown_timeout() -> void:
+	character.can_attack = true

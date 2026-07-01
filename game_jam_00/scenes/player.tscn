@@ -187,6 +187,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="RollCooldown" type="Timer" parent="StateMachine/Rolling" unique_id=514302148]
+wait_time = 2.0
 one_shot = true
 
 [node name="Dead" type="Node" parent="StateMachine" unique_id=544298561 node_paths=PackedStringArray("flash_component")]
