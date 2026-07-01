@@ -12,6 +12,7 @@ class_name Player
 
 @export_category("States")
 @export var state_machine: CharacterStateMachine
+@export var dead_state: State
 
 var can_roll: bool = true
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 	anim_tree.active = true
 	Globals.player = self
 	Globals.has_player.emit()
+	health_component.on_death.connect(dead)
 
 func _physics_process(delta: float) -> void:
 	movement_component.dir.x = Input.get_axis("move_left", "move_right")
@@ -32,3 +34,6 @@ func _physics_process(delta: float) -> void:
 	
 	if movement_component.dir and movement_component.can_move:
 		interact_component.position = movement_component.dir.normalized() * 8
+
+func dead() -> void:
+	state_machine.current_state.next_state = dead_state

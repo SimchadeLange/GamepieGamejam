@@ -50,7 +50,7 @@ states/idle/position = Vector2(341.66666, 99.11111)
 states/walking/node = SubResource("AnimationNodeAnimation_d2wvv")
 states/walking/position = Vector2(341.8889, 1.6666641)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_d2wvv"), "idle", "walking", SubResource("AnimationNodeStateMachineTransition_3v2ag"), "walking", "idle", SubResource("AnimationNodeStateMachineTransition_y4r1p")]
-graph_offset = Vector2(-275, -101)
+graph_offset = Vector2(-186.72018, -113.84752)
 
 [sub_resource type="Animation" id="Animation_d2wvv"]
 length = 0.001
@@ -95,7 +95,7 @@ _data = {
 &"walking": SubResource("Animation_jej6c")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("sprite", "anim_tree", "health_component", "movement_component", "interact_component", "state_machine")]
+[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("sprite", "anim_tree", "health_component", "movement_component", "interact_component", "state_machine", "dead_state")]
 z_index = 1
 collision_layer = 2
 collision_mask = 9
@@ -106,6 +106,7 @@ health_component = NodePath("HealthComponent")
 movement_component = NodePath("MovementComponent")
 interact_component = NodePath("InteractComponent")
 state_machine = NodePath("StateMachine")
+dead_state = NodePath("StateMachine/Dead")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=268790705]
 visibility_layer = 0
@@ -122,6 +123,7 @@ position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_uxpb3")
 
 [node name="InteractComponent" type="Area2D" parent="." unique_id=620239714]
+visible = false
 collision_layer = 4
 collision_mask = 8
 script = ExtResource("3_d2wvv")

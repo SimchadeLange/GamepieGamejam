@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="4_yjhhj"]
 [ext_resource type="Script" uid="uid://ctb3oc8wewgcl" path="res://scripts/enemy/enemy_00/idle_state.gd" id="5_qpise"]
 [ext_resource type="Texture2D" uid="uid://sdupsunqnsq6" path="res://assets/cone_light.png" id="7_ots75"]
+[ext_resource type="Script" uid="uid://0carti3rffau" path="res://scripts/resources/attack_component.gd" id="8_fv36i"]
 [ext_resource type="Script" uid="uid://c800y2q6c45cp" path="res://scripts/resources/pathfinding_component.gd" id="8_q04cj"]
 [ext_resource type="Script" uid="uid://lu47o1wlcwy6" path="res://scripts/enemy/enemy_00/chasing_state.gd" id="11_p24m8"]
 [ext_resource type="Script" uid="uid://dotvolxpubdjp" path="res://scripts/enemy/enemy_00/attacking_state.gd" id="12_2oc6g"]
@@ -17,10 +18,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ots75"]
 radius = 6.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6k1if"]
+size = Vector2(20.5, 21.75)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(12, 12)
 
-[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("sprite", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "state_machine", "chasing_state", "attacking_state", "dead_state")]
+[node name="Enemy_00" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("sprite", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "attack_component", "state_machine", "chasing_state", "attacking_state", "dead_state")]
 collision_layer = 8
 script = ExtResource("1_47iip")
 sprite = NodePath("Sprite2D")
@@ -28,6 +32,7 @@ movement_component = NodePath("MovementComponent")
 pathfinding_component = NodePath("PathfindingComponent")
 spotlight_component = NodePath("SpotlightComponent")
 health_component = NodePath("HealthComponent")
+attack_component = NodePath("AttackComponent")
 state_machine = NodePath("StateMachine")
 chasing_state = NodePath("StateMachine/Chasing")
 attacking_state = NodePath("StateMachine/Attacking")
@@ -57,6 +62,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_jc35d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=585940616]
+visible = false
 shape = SubResource("CircleShape2D_ots75")
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1888361400 node_paths=PackedStringArray("character", "state_machine")]
@@ -67,7 +73,7 @@ speed = 32.0
 metadata/_custom_type_script = "uid://doiclrfibubxr"
 
 [node name="PathfindingComponent" type="NavigationAgent2D" parent="." unique_id=1155631839 node_paths=PackedStringArray("character", "movement_component")]
-target_desired_distance = 40.0
+target_desired_distance = 30.0
 avoidance_enabled = true
 script = ExtResource("8_q04cj")
 character = NodePath("..")
@@ -78,6 +84,15 @@ metadata/_custom_type_script = "uid://c800y2q6c45cp"
 script = ExtResource("2_3dgu2")
 health = 5
 metadata/_custom_type_script = "uid://dkbomf5xkxumd"
+
+[node name="AttackComponent" type="Area2D" parent="." unique_id=530134624]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("8_fv36i")
+metadata/_custom_type_script = "uid://0carti3rffau"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent" unique_id=527256774]
+shape = SubResource("RectangleShape2D_6k1if")
 
 [node name="HitboxComponent" type="Area2D" parent="." unique_id=1259340042 node_paths=PackedStringArray("health_component")]
 visible = false
@@ -109,13 +124,15 @@ one_shot = true
 [node name="NextWanderTimer" type="Timer" parent="StateMachine/Idle" unique_id=497550205]
 one_shot = true
 
-[node name="Chasing" type="Node" parent="StateMachine" unique_id=1632496936 node_paths=PackedStringArray("pathfinding_component", "movement_component")]
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=1632496936 node_paths=PackedStringArray("pathfinding_component", "movement_component", "idle_state")]
 script = ExtResource("11_p24m8")
 pathfinding_component = NodePath("../../PathfindingComponent")
 movement_component = NodePath("../../MovementComponent")
+idle_state = NodePath("../Idle")
 
-[node name="Attacking" type="Node" parent="StateMachine" unique_id=775203745 node_paths=PackedStringArray("attack_duration_timer", "chasing_state")]
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=775203745 node_paths=PackedStringArray("attack_component", "attack_duration_timer", "chasing_state")]
 script = ExtResource("12_2oc6g")
+attack_component = NodePath("../../AttackComponent")
 attack_duration_timer = NodePath("AttackDurationTimer")
 chasing_state = NodePath("../Chasing")
 can_move = false

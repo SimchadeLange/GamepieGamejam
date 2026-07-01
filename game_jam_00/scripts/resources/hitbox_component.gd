@@ -14,4 +14,3 @@ func damage(attack: Attack) -> void:
 func interact() -> void:
 	if is_interactable:
 		on_interact.emit()
-		print("interacted")
