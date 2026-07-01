@@ -8,7 +8,6 @@ signal on_damage(attack: Attack)
 signal on_death
 
 func damage(attack: Attack) -> void:
-	print("hit")
 	health -= attack.attack_damage
 	if health > 0:
 		on_damage.emit(attack)
