@@ -1,4 +1,6 @@
 extends State
 
+@export var flash_component: FlashComponent
+
 func on_enter() -> void:
-	pass
+	flash_component.flash()

@@ -189,8 +189,9 @@ one_shot = true
 [node name="RollCooldown" type="Timer" parent="StateMachine/Rolling" unique_id=514302148]
 one_shot = true
 
-[node name="Dead" type="Node" parent="StateMachine" unique_id=544298561]
+[node name="Dead" type="Node" parent="StateMachine" unique_id=544298561 node_paths=PackedStringArray("flash_component")]
 script = ExtResource("7_smehm")
+flash_component = NodePath("../../FlashComponent")
 can_move = false
 
 [node name="Hit" type="Node" parent="StateMachine" unique_id=507577917 node_paths=PackedStringArray("idle_state", "flash_component", "hit_duration_timer")]
