@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bnvbo5wjckmcc" path="res://scenes/building_00.tscn" id="1_y0acb"]
 [ext_resource type="PackedScene" uid="uid://cll5o11denx7" path="res://scenes/player.tscn" id="2_j4d2a"]
-[ext_resource type="PackedScene" uid="uid://cnm00wt2ojqqd" path="res://scenes/enemy_00.tscn" id="3_u81e1"]
+[ext_resource type="PackedScene" uid="uid://cnm00wt2ojqqd" path="res://scenes/guard.tscn" id="3_u81e1"]
 [ext_resource type="PackedScene" uid="uid://bns6iq1g6d153" path="res://scenes/enemy_01.tscn" id="4_j4d2a"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6k1if"]
@@ -45,6 +45,7 @@ energy = 0.4
 blend_mode = 1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1571733874]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_6k1if")
 
 [node name="Enemy_04" parent="." unique_id=1735809285 instance=ExtResource("4_j4d2a")]

@@ -1,25 +1,21 @@
 [gd_scene format=3 uid="uid://bns6iq1g6d153"]
 
-[ext_resource type="Script" uid="uid://bwavernbtwpbo" path="res://scripts/enemy/enemy_01/enemy_01.gd" id="1_il2p4"]
+[ext_resource type="Script" uid="uid://bwavernbtwpbo" path="res://scripts/enemy/guard/enemy_01.gd" id="1_il2p4"]
 [ext_resource type="Texture2D" uid="uid://sdupsunqnsq6" path="res://assets/cone_light.png" id="2_lq8o4"]
 [ext_resource type="Script" uid="uid://d2x30iqu2oy5u" path="res://scripts/resources/spotlight_component.gd" id="3_mrrc1"]
 [ext_resource type="Texture2D" uid="uid://cx6bmmhbdhhjl" path="res://icon.svg" id="4_q8axu"]
 [ext_resource type="Script" uid="uid://doiclrfibubxr" path="res://scripts/resources/movement_component.gd" id="5_2g0f1"]
 [ext_resource type="Script" uid="uid://c800y2q6c45cp" path="res://scripts/resources/pathfinding_component.gd" id="6_0fp4e"]
 [ext_resource type="Script" uid="uid://dkbomf5xkxumd" path="res://scripts/resources/health_component.gd" id="7_8btur"]
-[ext_resource type="Script" uid="uid://0carti3rffau" path="res://scripts/resources/attack_component.gd" id="8_75dmp"]
 [ext_resource type="Script" uid="uid://bainvlpqjw1h3" path="res://scripts/resources/hitbox_component.gd" id="9_fswh7"]
 [ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="10_mtdwh"]
-[ext_resource type="Script" uid="uid://dfhsu6cm65h15" path="res://scripts/enemy/enemy_01/idle_state.gd" id="11_il2p4"]
-[ext_resource type="Script" uid="uid://pkorpd2sjxks" path="res://scripts/enemy/enemy_01/running_state.gd" id="12_e1vov"]
-[ext_resource type="Script" uid="uid://hue00pki4q8e" path="res://scripts/enemy/enemy_01/dead_state.gd" id="13_il2p4"]
-[ext_resource type="Script" uid="uid://dboke2c01urxy" path="res://scripts/enemy/enemy_01/waiting_state.gd" id="14_e1vov"]
+[ext_resource type="Script" uid="uid://dfhsu6cm65h15" path="res://scripts/enemy/guard/idle_state.gd" id="11_il2p4"]
+[ext_resource type="Script" uid="uid://pkorpd2sjxks" path="res://scripts/enemy/guard/running_state.gd" id="12_e1vov"]
+[ext_resource type="Script" uid="uid://hue00pki4q8e" path="res://scripts/enemy/guard/dead_state.gd" id="13_il2p4"]
+[ext_resource type="Script" uid="uid://dboke2c01urxy" path="res://scripts/enemy/guard/waiting_state.gd" id="14_e1vov"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ots75"]
 radius = 6.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6k1if"]
-size = Vector2(20.5, 21.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(12, 12)
@@ -56,7 +52,7 @@ collision_mask = 2
 polygon = PackedVector2Array(0, 0, -24, 51, 24, 51)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1511814066]
-self_modulate = Color(0.9999694, 0.31265548, 0.39448527, 1)
+self_modulate = Color(2.5990605e-06, 0.65610313, 0.8387985, 1)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_q8axu")
 
@@ -83,15 +79,6 @@ metadata/_custom_type_script = "uid://c800y2q6c45cp"
 script = ExtResource("7_8btur")
 health = 5
 metadata/_custom_type_script = "uid://dkbomf5xkxumd"
-
-[node name="AttackComponent" type="Area2D" parent="." unique_id=530134624]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("8_75dmp")
-metadata/_custom_type_script = "uid://0carti3rffau"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent" unique_id=527256774]
-shape = SubResource("RectangleShape2D_6k1if")
 
 [node name="HitboxComponent" type="Area2D" parent="." unique_id=1259340042 node_paths=PackedStringArray("health_component")]
 visible = false

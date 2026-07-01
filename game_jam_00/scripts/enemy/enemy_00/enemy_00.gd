@@ -40,7 +40,8 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = true
 
 func on_player_spotted() -> void:
-	if state_machine.current_state != chasing_state and movement_component.can_move:
+	if state_machine.current_state != chasing_state and \
+			movement_component.can_move:
 		state_machine.current_state.next_state = chasing_state
 
 func _in_player_range() -> void:
