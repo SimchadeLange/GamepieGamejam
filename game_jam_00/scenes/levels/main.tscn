@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dg20bly5q7crl"]
 
+[ext_resource type="Script" uid="uid://bw8ljn3qrnxr2" path="res://scripts/resources/paths/path_component.gd" id="1_u81e1"]
 [ext_resource type="PackedScene" uid="uid://bnvbo5wjckmcc" path="res://scenes/building_00.tscn" id="1_y0acb"]
+[ext_resource type="Script" uid="uid://d1dq00q2k7txj" path="res://scripts/resources/paths/path_point.gd" id="2_b6bv0"]
 [ext_resource type="PackedScene" uid="uid://cll5o11denx7" path="res://scenes/player.tscn" id="2_j4d2a"]
 [ext_resource type="PackedScene" uid="uid://bns6iq1g6d153" path="res://scenes/villager.tscn" id="3_j4d2a"]
 [ext_resource type="PackedScene" uid="uid://cnm00wt2ojqqd" path="res://scenes/guard.tscn" id="3_u81e1"]
@@ -11,6 +13,25 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-261, -177, 174, -168, 217, 219, -246, 216)])
 
 [node name="Main" type="Node2D" unique_id=1317248791]
+
+[node name="PathComponent" type="Node2D" parent="." unique_id=806041041]
+script = ExtResource("1_u81e1")
+metadata/_custom_type_script = "uid://bw8ljn3qrnxr2"
+
+[node name="PathPoint" type="Node2D" parent="PathComponent" unique_id=1730526602]
+position = Vector2(-134, 20)
+script = ExtResource("2_b6bv0")
+metadata/_custom_type_script = "uid://d1dq00q2k7txj"
+
+[node name="PathPoint2" type="Node2D" parent="PathComponent" unique_id=331099211]
+position = Vector2(-82, -54)
+script = ExtResource("2_b6bv0")
+metadata/_custom_type_script = "uid://d1dq00q2k7txj"
+
+[node name="PathPoint3" type="Node2D" parent="PathComponent" unique_id=851344285]
+position = Vector2(-53, 18)
+script = ExtResource("2_b6bv0")
+metadata/_custom_type_script = "uid://d1dq00q2k7txj"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=747022573]
 offset_left = -300.0
@@ -33,16 +54,12 @@ energy = 0.4
 blend_mode = 1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1571733874]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_6k1if")
 
 [node name="Villager" parent="." unique_id=1667096636 instance=ExtResource("3_j4d2a")]
 position = Vector2(-72, 59)
 
-[node name="Guard" parent="." unique_id=1285834276 instance=ExtResource("3_u81e1")]
-position = Vector2(70, 37)
-
-[node name="Guard2" parent="." unique_id=1861558563 instance=ExtResource("3_u81e1")]
-position = Vector2(-123, -19)
-
-[node name="Guard3" parent="." unique_id=1958787251 instance=ExtResource("3_u81e1")]
-position = Vector2(-167, 157)
+[node name="Guard" parent="." unique_id=1285834276 node_paths=PackedStringArray("patrol_path") instance=ExtResource("3_u81e1")]
+position = Vector2(-169, 46)
+patrol_path = NodePath("../PathComponent")

@@ -4,7 +4,7 @@ class_name PathfindingComponent
 
 @export var character: PhysicsBody2D
 @export var movement_component: MovementComponent
-var target: PhysicsBody2D
+var target: Node2D
 
 func chase_target() -> void:
 	if target:

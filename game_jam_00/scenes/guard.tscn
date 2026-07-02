@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://ctb3oc8wewgcl" path="res://scripts/enemy/guard/idle_state.gd" id="5_qpise"]
 [ext_resource type="Texture2D" uid="uid://sdupsunqnsq6" path="res://assets/cone_light.png" id="7_ots75"]
 [ext_resource type="Script" uid="uid://0carti3rffau" path="res://scripts/resources/attack_component.gd" id="8_fv36i"]
-[ext_resource type="Script" uid="uid://c800y2q6c45cp" path="res://scripts/resources/pathfinding_component.gd" id="8_q04cj"]
+[ext_resource type="Script" uid="uid://c800y2q6c45cp" path="res://scripts/resources/paths/pathfinding_component.gd" id="8_q04cj"]
 [ext_resource type="Script" uid="uid://lu47o1wlcwy6" path="res://scripts/enemy/guard/chasing_state.gd" id="11_p24m8"]
 [ext_resource type="Script" uid="uid://dotvolxpubdjp" path="res://scripts/enemy/guard/attacking_state.gd" id="12_2oc6g"]
 [ext_resource type="Script" uid="uid://xu1pxrogty61" path="res://scripts/enemy/guard/dead_state.gd" id="13_l306i"]
@@ -43,14 +43,13 @@ dead_state = NodePath("StateMachine/Dead")
 texture_filter = 1
 shadow_enabled = true
 texture = ExtResource("7_ots75")
-offset = Vector2(0, 28)
+offset = Vector2(0, 32)
 script = ExtResource("3_2lxw6")
 movement_component = NodePath("../MovementComponent")
 light_area = NodePath("Area2D")
 metadata/_custom_type_script = "uid://d2x30iqu2oy5u"
 
 [node name="Area2D" type="Area2D" parent="SpotlightComponent" unique_id=942178518]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -113,10 +112,10 @@ character = NodePath("..")
 current_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://ctk743jn0ttiy"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1610090786 node_paths=PackedStringArray("movement_component", "wander_timer", "next_wander_timer")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1610090786 node_paths=PackedStringArray("movement_component", "pathfinding_component", "next_wander_timer")]
 script = ExtResource("5_qpise")
 movement_component = NodePath("../../MovementComponent")
-wander_timer = NodePath("WanderTimer")
+pathfinding_component = NodePath("../../PathfindingComponent")
 next_wander_timer = NodePath("NextWanderTimer")
 
 [node name="WanderTimer" type="Timer" parent="StateMachine/Idle" unique_id=1633906970]

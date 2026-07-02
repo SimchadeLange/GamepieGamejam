@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Guard
 
 @export var sprite: Sprite2D
+@export var patrol_path: PathComponent
 
 @export_category("Components") 
 @export var movement_component: MovementComponent
@@ -21,9 +22,8 @@ func _ready() -> void:
 	health_component.on_death.connect(dead)
 	spotlight_component.target_spotted.connect(on_player_spotted)
 	pathfinding_component.target_reached.connect(_in_player_range)
-	if !Globals.player:
-		await Globals.has_player
-	pathfinding_component.target = Globals.player
+	if !patrol_path:
+		push_warning(self.name + " doesn't have patrol path!")
 
 func _physics_process(delta: float) -> void:
 	movement_component.movement_process(delta)
@@ -46,7 +46,8 @@ func on_player_spotted() -> void:
 		state_machine.current_state.next_state = chasing_state
 
 func _in_player_range() -> void:
-	state_machine.current_state.next_state = attacking_state
+	if pathfinding_component.target is Player:
+		state_machine.current_state.next_state = attacking_state
 
 func dead() -> void:
 	state_machine.current_state.next_state = dead_state

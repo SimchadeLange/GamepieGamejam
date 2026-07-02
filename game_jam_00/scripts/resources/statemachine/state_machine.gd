@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 
 	current_state.state_process(delta)
 
-func switch_states(new_state : State):
+func switch_states(new_state: State):
 	if current_state != null:
 		current_state.on_exit()
 		current_state.next_state = null

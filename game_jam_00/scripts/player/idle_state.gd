@@ -14,7 +14,7 @@ func on_enter():
 func state_process(_delta):
 	pass
 
-func state_input(event : InputEvent):
+func state_input(event: InputEvent):
 	if event.is_action_pressed("roll") and character.can_roll:
 		next_state = rolling_state
 	elif event.is_action_pressed("interact") and interact_component.in_interactable:

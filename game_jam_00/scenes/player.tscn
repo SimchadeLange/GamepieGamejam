@@ -19,8 +19,9 @@
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bq816"]
 polygon = PackedVector2Array(-5, -1, -3, 0, -2, 6, 2, 6, 4, 1, 4, -7, 1, -10, -2, -10, -5, -7)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
-size = Vector2(10, 12)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j4d2a"]
+radius = 5.0
+height = 14.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rii1s"]
 size = Vector2(10, 12)
@@ -125,9 +126,8 @@ script = ExtResource("3_oprun")
 sprites = [NodePath("../Sprite2D")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=220740742]
-visible = false
 position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_uxpb3")
+shape = SubResource("CapsuleShape2D_j4d2a")
 
 [node name="InteractComponent" type="Area2D" parent="." unique_id=620239714]
 visible = false

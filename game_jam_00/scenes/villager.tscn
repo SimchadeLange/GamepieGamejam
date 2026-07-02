@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://d2x30iqu2oy5u" path="res://scripts/resources/spotlight_component.gd" id="3_mrrc1"]
 [ext_resource type="Texture2D" uid="uid://cx6bmmhbdhhjl" path="res://icon.svg" id="4_q8axu"]
 [ext_resource type="Script" uid="uid://doiclrfibubxr" path="res://scripts/resources/movement_component.gd" id="5_2g0f1"]
-[ext_resource type="Script" uid="uid://c800y2q6c45cp" path="res://scripts/resources/pathfinding_component.gd" id="6_0fp4e"]
+[ext_resource type="Script" uid="uid://c800y2q6c45cp" path="res://scripts/resources/paths/pathfinding_component.gd" id="6_0fp4e"]
 [ext_resource type="Script" uid="uid://dkbomf5xkxumd" path="res://scripts/resources/health_component.gd" id="7_8btur"]
 [ext_resource type="Script" uid="uid://bainvlpqjw1h3" path="res://scripts/resources/hitbox_component.gd" id="9_fswh7"]
 [ext_resource type="Script" uid="uid://ctk743jn0ttiy" path="res://scripts/resources/statemachine/state_machine.gd" id="10_mtdwh"]
@@ -37,7 +37,7 @@ waiting_state = NodePath("StateMachine/Waiting")
 texture_filter = 1
 shadow_enabled = true
 texture = ExtResource("2_lq8o4")
-offset = Vector2(0, 28)
+offset = Vector2(0, 32)
 script = ExtResource("3_mrrc1")
 movement_component = NodePath("../MovementComponent")
 light_area = NodePath("Area2D")
