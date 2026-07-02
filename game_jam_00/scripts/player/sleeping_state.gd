@@ -1,9 +1,8 @@
 extends State
 
 @export var movement_component: MovementComponent
+@export var idle_state: State
 
-func on_enter() -> void:
-	movement_component.process_mode = Node.PROCESS_MODE_DISABLED
-
-func on_exit() -> void:
-	movement_component.process_mode = Node.PROCESS_MODE_PAUSABLE
+func state_process(_delta: float) -> void:
+	if Globals.current_player == character:
+		next_state = idle_state

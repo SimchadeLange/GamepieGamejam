@@ -6,6 +6,7 @@ extends State
 @export var attack_duration_timer: Timer
 @export var attack_cooldown_timer: Timer
 @export var chasing_state: State
+@export var idle_state: State
 
 func _ready() -> void:
 	attack_cooldown_timer.timeout.connect(_on_attack_cooldown_timeout)
@@ -27,10 +28,13 @@ func _on_attack_duration_timeout() -> void:
 	attack_cooldown_timer.start()
 
 func _on_attack_cooldown_timeout() -> void:
-	if character.global_position.distance_to(
-			pathfinding_component.target.global_position) < 30 and \
-				pathfinding_component.target.health_component:
-		on_exit()
-		on_enter()
+	if pathfinding_component.target:
+		if character.global_position.distance_to(
+				pathfinding_component.target.global_position) < 30 and \
+					pathfinding_component.target.health_component:
+			on_exit()
+			on_enter()
+		else:
+			next_state = chasing_state
 	else:
-		next_state = chasing_state
+		next_state = idle_state

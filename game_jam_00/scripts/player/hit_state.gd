@@ -1,6 +1,7 @@
 extends State
 
 @export var idle_state: State
+@export var sleep_state: State
 @export var flash_component: FlashComponent
 @export var hit_stun_duration_timer: Timer
 
@@ -16,4 +17,7 @@ func on_exit() -> void:
 	hit_stun_duration_timer.wait_time = 0.2
 
 func _on_hit_duration_timeout() -> void:
-	next_state = idle_state
+	if Globals.current_player == character:
+		next_state = idle_state
+	else:
+		next_state = sleep_state

@@ -10,7 +10,7 @@ func on_enter() -> void:
 
 func state_process(_delta: float) -> void:
 	pathfinding_component.chase_target()
-	if !Globals.player.health_component:
+	if !Globals.current_player.health_component:
 		next_state = idle_state
 
 func on_exit() -> void:
@@ -18,6 +18,8 @@ func on_exit() -> void:
 
 func get_nearest_guard() -> Guard:
 	var guards: Array[Node] = get_tree().get_nodes_in_group("Guards")
+	if !guards:
+		return
 	var new_target: Guard = guards[0]
 	for guard in guards:
 		if character.global_position.distance_to(guard.global_position) < \

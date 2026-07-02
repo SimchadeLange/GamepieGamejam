@@ -8,6 +8,7 @@ func _ready() -> void:
 	attack_duration_timer.timeout.connect(_on_attack_duration_timeout)
 
 func on_enter() -> void:
+	interact_component.in_interactable.interact()
 	attack_duration_timer.start()
 
 func on_exit() -> void:

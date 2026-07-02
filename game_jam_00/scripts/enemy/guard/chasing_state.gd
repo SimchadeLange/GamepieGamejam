@@ -6,11 +6,12 @@ extends State
 
 func on_enter() -> void:
 	movement_component.speed_multiplier = 2.0
-	pathfinding_component.target = Globals.player
+	if Globals.current_player:
+		pathfinding_component.target = Globals.current_player
 
 func state_process(_delta: float) -> void:
 	pathfinding_component.chase_target()
-	if !Globals.player.health_component:
+	if !Globals.current_player.health_component:
 		next_state = idle_state
 
 func on_exit() -> void:

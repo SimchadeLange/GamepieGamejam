@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dg20bly5q7crl"]
 
 [ext_resource type="Script" uid="uid://bw8ljn3qrnxr2" path="res://scripts/resources/paths/path_component.gd" id="1_u81e1"]
+[ext_resource type="Script" uid="uid://baqovg8wyjrn1" path="res://scripts/player_body_manager.gd" id="1_ubwgw"]
+[ext_resource type="Script" uid="uid://o4rgiwrgmo7c" path="res://scenes/levels/camera_component.gd" id="1_vkq25"]
 [ext_resource type="PackedScene" uid="uid://bnvbo5wjckmcc" path="res://scenes/building_00.tscn" id="1_y0acb"]
 [ext_resource type="Script" uid="uid://d1dq00q2k7txj" path="res://scripts/resources/paths/path_point.gd" id="2_b6bv0"]
 [ext_resource type="PackedScene" uid="uid://cll5o11denx7" path="res://scenes/player.tscn" id="2_j4d2a"]
@@ -13,6 +15,15 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-261, -177, 174, -168, 217, 219, -246, 216)])
 
 [node name="Main" type="Node2D" unique_id=1317248791]
+y_sort_enabled = true
+
+[node name="CameraComponent" type="Camera2D" parent="." unique_id=1824783877]
+position = Vector2(-28, 107)
+script = ExtResource("1_vkq25")
+metadata/_custom_type_script = "uid://o4rgiwrgmo7c"
+
+[node name="Player" parent="." unique_id=291136771 instance=ExtResource("2_j4d2a")]
+position = Vector2(-28, 107)
 
 [node name="PathComponent" type="Node2D" parent="." unique_id=806041041]
 script = ExtResource("1_u81e1")
@@ -29,7 +40,12 @@ script = ExtResource("2_b6bv0")
 metadata/_custom_type_script = "uid://d1dq00q2k7txj"
 
 [node name="PathPoint3" type="Node2D" parent="PathComponent" unique_id=851344285]
-position = Vector2(-53, 18)
+position = Vector2(75, -53)
+script = ExtResource("2_b6bv0")
+metadata/_custom_type_script = "uid://d1dq00q2k7txj"
+
+[node name="PathPoint4" type="Node2D" parent="PathComponent" unique_id=1809423349]
+position = Vector2(75, 77)
 script = ExtResource("2_b6bv0")
 metadata/_custom_type_script = "uid://d1dq00q2k7txj"
 
@@ -42,24 +58,24 @@ color = Color(0.5205716, 0.49708062, 0.39451304, 1)
 
 [node name="Building_00" parent="." unique_id=1970538616 instance=ExtResource("1_y0acb")]
 
-[node name="Player" parent="." unique_id=291136771 instance=ExtResource("2_j4d2a")]
-position = Vector2(-28, 107)
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=854447935]
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1017291919]
 energy = 0.4
 blend_mode = 1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1571733874]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_6k1if")
 
 [node name="Villager" parent="." unique_id=1667096636 instance=ExtResource("3_j4d2a")]
-position = Vector2(-72, 59)
+position = Vector2(-117, 137)
+
+[node name="Villager2" parent="." unique_id=429843771 instance=ExtResource("3_j4d2a")]
+position = Vector2(-197, 93)
 
 [node name="Guard" parent="." unique_id=1285834276 node_paths=PackedStringArray("patrol_path") instance=ExtResource("3_u81e1")]
-position = Vector2(-169, 46)
+position = Vector2(-188, -15)
 patrol_path = NodePath("../PathComponent")
+
+[node name="PlayerBodyManager" type="Node" parent="." unique_id=1924330774 node_paths=PackedStringArray("camera") groups=["PlayerBodyManager"]]
+script = ExtResource("1_ubwgw")
+player_scene = ExtResource("2_j4d2a")
+camera = NodePath("../CameraComponent")

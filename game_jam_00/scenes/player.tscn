@@ -40,11 +40,11 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3v2ag"]
 advance_mode = 2
-advance_expression = "movement_component.dir"
+advance_expression = "movement_component.dir and movement_component.can_move"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y4r1p"]
 advance_mode = 2
-advance_expression = "!movement_component.dir"
+advance_expression = "!movement_component.dir "
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f1ej7"]
 states/End/position = Vector2(546, 99.55556)
@@ -98,8 +98,9 @@ _data = {
 &"walking": SubResource("Animation_jej6c")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("sprite", "anim_tree", "health_component", "movement_component", "interact_component", "state_machine", "dead_state", "hit_state")]
+[node name="Player" type="CharacterBody2D" unique_id=291136771 node_paths=PackedStringArray("sprite", "anim_tree", "health_component", "movement_component", "interact_component", "state_machine", "dead_state", "hit_state", "sleep_state")]
 z_index = 1
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_g2els")
@@ -111,14 +112,16 @@ interact_component = NodePath("InteractComponent")
 state_machine = NodePath("StateMachine")
 dead_state = NodePath("StateMachine/Dead")
 hit_state = NodePath("StateMachine/Hit")
+sleep_state = NodePath("StateMachine/Sleeping")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=268790705]
 visibility_layer = 0
 occluder = SubResource("OccluderPolygon2D_bq816")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=846788843]
+position = Vector2(0, 2)
 texture = ExtResource("2_y4r1p")
-offset = Vector2(0, -2)
+offset = Vector2(0, -4)
 hframes = 6
 
 [node name="FlashComponent" type="Node" parent="." unique_id=1632185856 node_paths=PackedStringArray("sprites")]
@@ -126,6 +129,7 @@ script = ExtResource("3_oprun")
 sprites = [NodePath("../Sprite2D")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=220740742]
+visible = false
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_j4d2a")
 
@@ -170,10 +174,11 @@ character = NodePath("..")
 current_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://ctk743jn0ttiy"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1601426793 node_paths=PackedStringArray("rolling_state", "attack_state", "roll_cooldown_timer", "interact_component")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1601426793 node_paths=PackedStringArray("rolling_state", "attack_state", "sleep_state", "roll_cooldown_timer", "interact_component")]
 script = ExtResource("4_dqkch")
 rolling_state = NodePath("../Rolling")
 attack_state = NodePath("../Attacking")
+sleep_state = NodePath("../Sleeping")
 roll_cooldown_timer = NodePath("../Rolling/RollCooldown")
 interact_component = NodePath("../../InteractComponent")
 
@@ -197,9 +202,10 @@ script = ExtResource("7_smehm")
 flash_component = NodePath("../../FlashComponent")
 can_move = false
 
-[node name="Hit" type="Node" parent="StateMachine" unique_id=507577917 node_paths=PackedStringArray("idle_state", "flash_component", "hit_stun_duration_timer")]
+[node name="Hit" type="Node" parent="StateMachine" unique_id=507577917 node_paths=PackedStringArray("idle_state", "sleep_state", "flash_component", "hit_stun_duration_timer")]
 script = ExtResource("8_ur7pv")
 idle_state = NodePath("../Idle")
+sleep_state = NodePath("../Sleeping")
 flash_component = NodePath("../../FlashComponent")
 hit_stun_duration_timer = NodePath("HitStunDuration")
 can_move = false
@@ -218,10 +224,11 @@ can_move = false
 [node name="AttackDuration" type="Timer" parent="StateMachine/Attacking" unique_id=1419512071]
 one_shot = true
 
-[node name="Sleeping" type="Node" parent="StateMachine" unique_id=1855003863 node_paths=PackedStringArray("movement_component")]
+[node name="Sleeping" type="Node" parent="StateMachine" unique_id=1855003863 node_paths=PackedStringArray("movement_component", "idle_state")]
 process_mode = 1
 script = ExtResource("13_f1ej7")
 movement_component = NodePath("../../MovementComponent")
+idle_state = NodePath("../Idle")
 can_move = false
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1530141892]

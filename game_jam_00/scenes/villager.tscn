@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://pkorpd2sjxks" path="res://scripts/enemy/villager/running_state.gd" id="12_e1vov"]
 [ext_resource type="Script" uid="uid://hue00pki4q8e" path="res://scripts/enemy/villager/dead_state.gd" id="13_il2p4"]
 [ext_resource type="Script" uid="uid://dboke2c01urxy" path="res://scripts/enemy/villager/waiting_state.gd" id="14_e1vov"]
+[ext_resource type="Script" uid="uid://cqh0eutqsd7gh" path="res://scripts/enemy/villager/hit_state.gd" id="14_ud373"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ots75"]
 radius = 6.0
@@ -20,7 +21,7 @@ radius = 6.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxpb3"]
 size = Vector2(12, 12)
 
-[node name="Villager" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("sprite", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "state_machine", "running_state", "dead_state", "waiting_state")]
+[node name="Villager" type="CharacterBody2D" unique_id=1667096636 node_paths=PackedStringArray("sprite", "movement_component", "pathfinding_component", "spotlight_component", "health_component", "hitbox_component", "state_machine", "running_state", "dead_state", "waiting_state", "hit_state")]
 collision_layer = 8
 script = ExtResource("1_il2p4")
 sprite = NodePath("Sprite2D")
@@ -28,10 +29,12 @@ movement_component = NodePath("MovementComponent")
 pathfinding_component = NodePath("PathfindingComponent")
 spotlight_component = NodePath("SpotlightComponent")
 health_component = NodePath("HealthComponent")
+hitbox_component = NodePath("HitboxComponent")
 state_machine = NodePath("StateMachine")
 running_state = NodePath("StateMachine/Running")
 dead_state = NodePath("StateMachine/Dead")
 waiting_state = NodePath("StateMachine/Waiting")
+hit_state = NodePath("StateMachine/Hit")
 
 [node name="SpotlightComponent" type="PointLight2D" parent="." unique_id=806071600 node_paths=PackedStringArray("movement_component", "light_area")]
 texture_filter = 1
@@ -131,3 +134,7 @@ can_move = false
 [node name="CooldownTimer" type="Timer" parent="StateMachine/Waiting" unique_id=24438540]
 wait_time = 10.0
 one_shot = true
+
+[node name="Hit" type="Node" parent="StateMachine" unique_id=1004285771]
+script = ExtResource("14_ud373")
+can_move = false
