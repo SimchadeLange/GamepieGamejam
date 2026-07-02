@@ -1,6 +1,7 @@
 extends State
 
 @export var attack_component: AttackComponent
+@export var movement_component: MovementComponent
 @export var pathfinding_component: PathfindingComponent
 @export var attack_duration_timer: Timer
 @export var attack_cooldown_timer: Timer
@@ -20,6 +21,8 @@ func on_exit() -> void:
 func _on_attack_duration_timeout() -> void:
 	var attack := Attack.new()
 	attack.attack_damage = 5
+	attack.attack_dir = movement_component.prev_dir
+	attack.knockback_force = 150.0
 	attack_component.do_attack(attack)
 	attack_cooldown_timer.start()
 

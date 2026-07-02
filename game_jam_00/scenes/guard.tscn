@@ -131,9 +131,10 @@ pathfinding_component = NodePath("../../PathfindingComponent")
 movement_component = NodePath("../../MovementComponent")
 idle_state = NodePath("../Idle")
 
-[node name="Attacking" type="Node" parent="StateMachine" unique_id=775203745 node_paths=PackedStringArray("attack_component", "pathfinding_component", "attack_duration_timer", "attack_cooldown_timer", "chasing_state")]
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=775203745 node_paths=PackedStringArray("attack_component", "movement_component", "pathfinding_component", "attack_duration_timer", "attack_cooldown_timer", "chasing_state")]
 script = ExtResource("12_2oc6g")
 attack_component = NodePath("../../AttackComponent")
+movement_component = NodePath("../../MovementComponent")
 pathfinding_component = NodePath("../../PathfindingComponent")
 attack_duration_timer = NodePath("AttackDurationTimer")
 attack_cooldown_timer = NodePath("AttackCooldownTimer")
@@ -153,6 +154,7 @@ spotlight_component = NodePath("../../SpotlightComponent")
 can_move = false
 
 [node name="StateDebugLabel" type="Label" parent="." unique_id=391365305 node_paths=PackedStringArray("state_machine")]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("15_vuaq3")

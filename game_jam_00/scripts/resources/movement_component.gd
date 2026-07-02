@@ -4,6 +4,7 @@ class_name MovementComponent
 
 @export var character: CharacterBody2D
 @export var state_machine: CharacterStateMachine
+@export var stun_timer: Timer
 @export var speed: float = 42.0
 @export var speed_multiplier: float = 1.0
 @export var speed_buildup: float = 2.0
@@ -25,3 +26,9 @@ func movement_process(delta: float) -> void:
 		character.velocity = lerp(character.velocity, Vector2.ZERO, delta * 10)
 	
 	character.move_and_slide()
+
+func knockback(knockback_dir: Vector2, force: float, stun_duration: float) -> void:
+	character.velocity = knockback_dir * force
+	if stun_timer:
+		stun_timer.wait_time = stun_duration
+	
